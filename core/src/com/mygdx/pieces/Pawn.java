@@ -5,8 +5,8 @@ import com.mygdx.drawable.Drawable;
 /**
  * Created by felipecosta on 10/2/17.
  */
-public class Pawn extends Drawable {
+public class Pawn extends Piece {
     public Pawn() {
-        super("pawn.jpg");
+        super(PieceCode.PAWN, "pawn_white.png");
     }
 }

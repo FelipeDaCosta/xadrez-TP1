@@ -8,9 +8,9 @@ import com.mygdx.game.Square;
  * Created by felipecosta on 10/2/17.
  */
 public abstract class Piece extends Drawable{
-    private int pieceCode;
+    private PieceCode pieceCode;
 
-    public Piece(int pieceCode, String pathToImage) {
+    public Piece(PieceCode pieceCode, String pathToImage) {
         super(pathToImage);
         this.pieceCode = pieceCode;
     }
@@ -20,5 +20,5 @@ public abstract class Piece extends Drawable{
         this.draw(sb);
     }
 
-    public int getPieceCode() { return this.pieceCode; };
+    public PieceCode getPieceCode() { return this.pieceCode; }
 }

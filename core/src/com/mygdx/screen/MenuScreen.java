@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.mygdx.game.Chess;
 import com.mygdx.game.Util;
+import com.mygdx.pieces.King;
 import com.mygdx.pieces.Pawn;
 
 /**
@@ -16,6 +17,7 @@ public class MenuScreen implements Screen{
     Chess game;
     OrthographicCamera camera;
     Pawn pawn;
+    King king;
 
     public MenuScreen(Chess game) {
         this.game = game;
@@ -23,6 +25,8 @@ public class MenuScreen implements Screen{
         camera.setToOrtho(false, Util.SCREEN_WIDTH, Util.SCREEN_HEIGHT);
         pawn = new Pawn();
         pawn.setPosition(20, 20);
+        king = new King();
+        king.setPosition(100, 100);
     }
 
     @Override
@@ -32,7 +36,7 @@ public class MenuScreen implements Screen{
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0, 0, 0.2f, 1);
+        Gdx.gl.glClearColor(0.3f, 0.5f, 0.9f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         camera.update();
@@ -40,6 +44,7 @@ public class MenuScreen implements Screen{
 
         game.sb.begin();
         pawn.draw(game.sb);
+        king.draw(game.sb);
         game.sb.end();
 
     }
