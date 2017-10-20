@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
+import com.mygdx.graphic.Chess;
 TP1;
 
 public class AndroidLauncher extends AndroidApplication {
