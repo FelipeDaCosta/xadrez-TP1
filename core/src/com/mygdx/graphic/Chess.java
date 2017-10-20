@@ -20,7 +20,7 @@ public class Chess extends Game {
         p2 = ct.join();
 
         BoardDrawer db = new BoardDrawer(ct,sb);
-        EventHandler eventHandler = new EventHandler(ct, db); //Como só o player 1 joga...
+        EventHandler eventHandler = new EventHandler(ct, db, p1);
         this.setScreen(new MenuScreen(this, eventHandler, ct));
 	}
 

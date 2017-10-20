@@ -66,7 +66,7 @@ public class ChessTable extends ChessBoard {
             super.getSquareByPosition(dest).getPiece().getPlayer().refresh();
         }
         super.move(source, dest);
-        //changeTurn(); Está comentada para que nos testes seja sempre a vez do player 1
+        changeTurn();
         return true;
     }
 

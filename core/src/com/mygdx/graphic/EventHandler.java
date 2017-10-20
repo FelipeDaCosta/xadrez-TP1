@@ -13,10 +13,13 @@ public class EventHandler {
     SpriteBatch sb;
     BoardDrawer db;
     PositionList posList=null;
-    Piece selected;
+    Piece selected=null;
+    Player pl;
     int k;
 
-    public EventHandler(ChessTable ct, BoardDrawer db) {
+    public EventHandler(ChessTable ct, BoardDrawer db, Player pl)
+    {
+        this.pl = pl;
         this.ct = ct;
         this.db = db;
     }
@@ -32,9 +35,13 @@ public class EventHandler {
 
     private void selectionHandler(int i, int j){
         if(selected == null) {
-            if (ct.getSquare(i, j).hasPiece()) {
-                selected = ct.getSquare(i, j).getPiece();
-                posList = selected.canGo(ct);
+            if (ct.getSquare(i, j).hasPiece()){
+                //comentado para que o usuario jogue pelos 2
+                //if(ct.getSquare(i,j).getPiece().getPlayer() == pl) {
+                    selected = ct.getSquare(i, j).getPiece();
+                    posList = selected.canGo(ct);
+                    return;
+                //}
             }else{
                 return;
             }
@@ -48,10 +55,11 @@ public class EventHandler {
         posList=null;
 
         if(ct.getSquare(i,j).hasPiece()){
-            if(ct.getSquare(i,j).getPiece().getPlayer().getNumber() == ct.getWhoseTurn()){
+            // comentado pra que o usuario jogue pelos 2
+            //if(ct.getSquare(i,j).getPiece().getPlayer() == pl){
                 selected = ct.getSquare(i,j).getPiece();
                 posList = selected.canGo(ct);
-            }
+            //}
         }
     }
 

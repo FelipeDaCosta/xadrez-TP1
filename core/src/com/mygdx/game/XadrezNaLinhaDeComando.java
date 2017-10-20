@@ -35,7 +35,7 @@ public class XadrezNaLinhaDeComando {
 
         /*
         *
-        * Como jogar?
+        * Como jogar na linha de comando?
         * Basicamente, na jogada você escreve uma string do tipo "A2A3"
         * "A2A3" = peça que está na casa A2 para a casa A3
         *
