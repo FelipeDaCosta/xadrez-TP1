@@ -12,6 +12,10 @@ public abstract class Drawable extends Sprite{
 
     Texture texture;
 
+    public Drawable() {
+        super();
+    }
+
     public Drawable(String pathToImage) {
         super(new Texture(Gdx.files.internal(pathToImage)));
         texture = this.getTexture();

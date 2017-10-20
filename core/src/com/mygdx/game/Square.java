@@ -1,27 +1,66 @@
 package com.mygdx.game;
 
 import com.mygdx.drawable.Drawable;
+import com.mygdx.pieces.*;
 
 /**
  * Created by felipecosta on 10/2/17.
  */
-public class Square extends Drawable{
+public class Square{
 
-    private float x;
-    private float y;
+    private int X;
+    private int Y;
+    private boolean empty = true;
+    private Piece piece;
 
-    public Square(String pathToImage, float x, float y) {
-        super(pathToImage);
-        this.setPosition(x, y);
-        this.x = x;
-        this.y = y;
+
+    public Square(int X, int Y) {
+        this.X = X;
+        this.Y = Y;
     }
 
-    public float getX() { return x; }
+    public boolean hasPiece(){
+        return !empty;
+    }
+    public boolean isEmpty(){
+        return empty;
+    }
 
-    public void setX(float x) { this.x = x; }
+    public void putPiece(Piece p){
+        this.piece = p;
+        this.empty=false;;
 
-    public float getY() { return y; }
+    }
 
-    public void setY(float y) { this.y = y; }
+    /*Temporarios*/
+    public void setEmpty(){
+        this.empty=true;
+    }
+    public void putPieceByForce(Piece p){
+        this.piece = p;
+        this.empty=false;
+    }
+
+    public Piece takePiece() {
+        if (!empty) {
+            empty = true;
+            return piece;
+        }
+        System.out.println("Erro, você tentou tirar uma peça da casa "+X+" "+Y+" que esta vazia!");
+        return null;
+    }
+
+    public Piece getPiece(){
+        return this.piece;
+    }
+
+     public int getX() { return X; }
+
+     public int getY() { return Y; }
+
+     public Position getPosition(){
+        return new Position(X,Y);
+     }
+
+
 }
