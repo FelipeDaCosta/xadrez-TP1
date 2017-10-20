@@ -4,6 +4,13 @@ package com.mygdx.game;
 import com.mygdx.pieces.*;
 import java.util.ArrayList;
 
+/*
+* Esta classe implementa o objeto jogador que basicamente tem uma lista de peças, a variável que diz se é sua vez
+* o seu nome e seu número (1 ou 2) que indica em qual lado do tabuleiro ele joga (na hora de desenhar na tela também
+* decide qual cor terão suas peças)
+* */
+
+
 public class Player {
 
     private String name;
@@ -91,6 +98,7 @@ public class Player {
     public void setName(String name){
         this.name = name;
     }
+
     public String getName(){
         return this.name;
     }
@@ -102,4 +110,5 @@ public class Player {
     public PieceList getPieces() {
         return pieces;
     }
+
 }

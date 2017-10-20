@@ -1,4 +1,4 @@
-package com.mygdx.drawable;
+package com.mygdx.graphic;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;

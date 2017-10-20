@@ -1,38 +1,29 @@
 package com.mygdx.pieces;
 
-import com.mygdx.drawable.Drawable;
 import com.mygdx.game.*;
 
-import java.util.ArrayList;
-
 /**
- * Created by felipecosta on 10/2/17.
+ *
+ * Classe abstrata to objeto tipo Peça, que possui uma posição, um jogador (dono)
+ * a informação OnTheGame (indica se a peça tá viva)
+ *
+ *
+ * Obs:
+ * Anteriormente a classe piece estendia a Drawable, eu desacoplei totalmente a lógica do jogo da parte gráfica,
+ * a classe que desenha peça na tela agora é a DrawPiece (idealmente só quem desenhará peça serão os clientes, não o servidor)
+ *
  */
-public abstract class Piece extends Drawable {
+public abstract class Piece{
     private PieceCode pieceCode;
     private Position position;
     private boolean onTheGame = true;
-    protected int numPlayer;
     protected Player player;
-    Util util = new Util();
+    protected int numPlayer;
 
     public Piece(PieceCode pieceCode, char X, int Y) {
         this.pieceCode = pieceCode;
         position = new Position(X,Y);
     }
-
-    /*
-    * public Piece(PieceCode pieceCode, String pathToImage) {
-        super(pathToImage);
-        this.pieceCode = pieceCode;
-    }
-
-    public void drawAtSquare(SpriteBatch sb, Square sq) {
-        this.setPosition(sq.getX(), sq.getY());
-        this.draw(sb);
-    }
-    * */
-
     public void setPosition(char X, int Y){
         position.setPosition(X,Y);
     }
@@ -60,7 +51,7 @@ public abstract class Piece extends Drawable {
     }
 
     public boolean isEnemy(Piece p){
-        if(p.getNumPlayer()==this.numPlayer)
+        if(p.getNumPlayer()==this.player.getNumber())
             return false;
         return true;
     }
@@ -69,6 +60,10 @@ public abstract class Piece extends Drawable {
         return this.onTheGame;
     }
 
+
+    /*
+    * Não sabia como declarar um método que DEVE ser implementado pelos filhos de outro jeito.. =/
+    * */
     public PositionList canGo(ChessBoard cb){
         return null;
     }

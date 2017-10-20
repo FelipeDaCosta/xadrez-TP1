@@ -2,7 +2,20 @@ package com.mygdx.game;
 
 import com.mygdx.pieces.*;
 
-import java.util.ArrayList;
+/*
+* Esta é uma classe auxiliar que analisa os movimentos,
+*
+* O que JÁ está implementado:
+* Era a vez do jogador?
+* Ele está movimentando sua própria peça?
+* Essa peça pode ir pra onde ele quer? (baseado na lista canGo de cada peça)
+*
+* O que FALTA implementar:
+* Essa jogada deixa o rei vulnerável?
+* O jogador estava em cheque?
+* Essa jogada é um cheque-mate?
+*
+* */
 
 public class ChessLogic {
 
@@ -25,7 +38,6 @@ public class ChessLogic {
         list = piece.canGo(cb);
         //list.printListPositions(piece.getPieceCode()+""+piece.getPlayer().getNumber()+" can go to:");
         //list.printListPieces("", cb);
-        System.out.println("dest: "+dest.getX()+dest.getY());
         if(isOnTheList(list, dest)){
             //System.out.println("Posição foi encontrada dentro da lista canGo!");
             list.clear();

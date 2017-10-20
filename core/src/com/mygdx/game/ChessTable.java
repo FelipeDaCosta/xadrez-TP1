@@ -1,84 +1,84 @@
 package com.mygdx.game;
 
-import com.mygdx.pieces.*;
-import java.util.Scanner;
 
-public class ChessTable {
-
-
-
-    public static void main(String[] args){
-        Player p1;
-        Player p2;
-        ChessBoard chessBoard = new ChessBoard();
-
-        p1 = chessBoard.join();
-        p2 = chessBoard.join();
-        Scanner keyboard = new Scanner(System.in);
+/*
+*
+* Essa Classe implementa uma mesa de xadrez, na prática, implementa uma partida de xadrez.
+* Ela estende de ChessBoard porque a mesa tem todos os atributos e métodos de um tabuleiro de xadrez.
+*
+* A forma como a partida se dá foi pensada para funcionar em Rede.
+* Esta classe deve ser instanciada apenas UMA vez no servidor. Então, os jogadores remotamente chamam
+* o método join, que retorna um objeto do tipo Player ou uma mensagem de "mesa ocupada".
+*
+* Durante a partida, toda a movimentação de peças será feita através do método requestMove
+*
+* */
 
 
-        while(true) {
-            System.out.println();
-            chessBoard.printBoard();
-            System.out.println();
-            char Xs;
-            char Ys;
-            char Xd ;
-            char Yd;
-            while(true){
-                System.out.println("Jogada do Player "+chessBoard.getWhoseTurn()+": ");
-                String line = keyboard.nextLine();
-                if(line.length()==4){
-                    Xs = line.charAt(0);
-                    Ys = line.charAt(1);
-                    Xd = line.charAt(2);
-                    Yd = line.charAt(3);
 
-                    if(Xs >= (int)'A' && Xs <= (int)'H' && Xd >= (int)'A' && Xd <= (int)'H' && Ys > 48 && Ys<57 && Yd > 48 && Yd<57)
-                        break;
+public class ChessTable extends ChessBoard {
 
-                }else if(line.equals("listar")){
-                    p1.getPieces().printListPositions(p1.getName());
-                    p1.getPieces().printListPieces("");
-                    System.out.println();
-                    p2.getPieces().printListPositions(p2.getName());
-                    p2.getPieces().printListPieces("");
-                }else
-                System.out.println("Comando não reconhecido. Tente Novamente");
+    private int numPlayers=0;
+    int whoseTurn=1;
+    Player player1;
+    Player player2;    
+    ChessLogic chessLogic = new ChessLogic();
+    
+
+    public Player join(){
+        if(numPlayers==0) {
+            player1 = new Player(1);
+            for(int i=0; i < player1.getPieces().size(); i++){
+                super.getSquareByPosition(player1.getPieces().get(i).getPosition()).putPiece(player1.getPieces().get(i));
             }
-
-            System.out.println();
-            System.out.println(Xs + "" + Ys + " -> " + Xd + "" + Yd);
-            if ((chessBoard.getWhoseTurn() == 1)){
-                chessBoard.requestMove(p1, new Position(Xs, (int) Ys - 48), new Position(Xd, (int) Yd - 48));
-            }
-            if (chessBoard.getWhoseTurn() == 2) {
-                chessBoard.requestMove(p2, new Position(Xs, (int) Ys - 48), new Position(Xd, (int) Yd - 48));
-            }
+            player1.setTurn(true);
+            numPlayers++;
+            return player1;
         }
-
+        if(numPlayers==1){
+            player2 = new Player(2);
+            for(int i=0; i < player2.getPieces().size(); i++){
+                super.getSquareByPosition(player2.getPieces().get(i).getPosition().toInverted()).putPiece(player2.getPieces().get(i));
+            }
+            player2.setTurn(false);
+            numPlayers++;
+            return player2;
+        }else{
+            System.out.println("Mesa ocupada");
+            return null;
+        }
     }
 
-    public static void printListPositions(String head, PieceList list){
-        int size = list.size();
-        char X; int Y;
-        System.out.println(head);
-        for(int i=0; i<size; i++){
-            X = (char) (list.get(i).getPosition().getX()+65);
-            Y = list.get(i).getPosition().getY()+1;
-            System.out.print("("+X+","+Y+") ");
+    public boolean requestMove(Player p, Position source, Position dest){
+        if(super.getSquareByPosition(source).isEmpty()){
+            System.out.println("Não há peça na casa de origem do movimento");
+            return false;
         }
-        System.out.println();
-    }
-    public static void printListPieces(String head, PieceList list){
-        int size = list.size();
-        char X; int Y;
-        System.out.print(head);
-        for(int i=0; i<size; i++){
-            System.out.print(" "+list.get(i).getPieceCode()+"  ");
+
+        //manda a jogada para análise da classe chessLogic
+        if(!chessLogic.moveAnalisys(this, p, super.getSquareByPosition(source).getPiece(),dest)) {
+            System.out.println("Jogada não consentida.");
+            return false;
         }
-        System.out.println();
+
+        if(super.getSquareByPosition(dest).hasPiece()){
+            super.getSquareByPosition(dest).getPiece().kill();
+            super.getSquareByPosition(dest).getPiece().getPlayer().refresh();
+        }
+        super.move(source, dest);
+        //changeTurn(); Está comentada para que nos testes seja sempre a vez do player 1
+        return true;
     }
 
+    public void changeTurn(){
+        if(whoseTurn==1) whoseTurn = 2;
+        else whoseTurn=1;
+        player1.setTurn(!player1.getTurn());
+        player2.setTurn(!player2.getTurn());
+    }
 
+    public int getWhoseTurn(){
+        return whoseTurn;
+    }
+    
 }

@@ -5,11 +5,12 @@ import com.mygdx.game.Player;
 import com.mygdx.game.Position;
 import com.mygdx.game.PositionList;
 
-import java.util.ArrayList;
-
-/**
- * Created by felipecosta on 10/2/17.
- */
+/*
+* Todas as peças individuais estendem à Piece, e implementam um construtor (que recebe o jogador e a posição inicial)
+* E um método canGo que basicamente implementa a Lógica de movimentação da peça.
+* Este método canGo recebe um tabuleiro e, a partir dele, a peça, sabendo sua posição, retorna uma lista
+* de posições para onde ela pode ir.
+* */
 public class Pawn extends Piece {
 
     public Pawn(Player p, char X, int Y){
@@ -26,22 +27,22 @@ public class Pawn extends Piece {
         if(numPlayer==1) {
             p.moveUp();
             if (p.isValidPosition()) {
-                if (cb.byPosition(p).isEmpty()) {
+                if (cb.getSquareByPosition(p).isEmpty()) {
                     list.add(new Position(p));
                 }
             }
             p.moveLeft();
             if (p.isValidPosition()) {
-                if (!cb.byPosition(p).isEmpty()) {
-                    if (isEnemy(cb.byPosition(p).getPiece())) {
+                if (!cb.getSquareByPosition(p).isEmpty()) {
+                    if (isEnemy(cb.getSquareByPosition(p).getPiece())) {
                         list.add(new Position(p));
                     }
                 }
             }
             p.moveRight(2);
             if (p.isValidPosition()) {
-                if (!cb.byPosition(p).isEmpty()) {
-                    if (isEnemy(cb.byPosition(p).getPiece())) {
+                if (!cb.getSquareByPosition(p).isEmpty()) {
+                    if (isEnemy(cb.getSquareByPosition(p).getPiece())) {
                         list.add(new Position(p));
                     }
                 }
@@ -49,7 +50,7 @@ public class Pawn extends Piece {
             if (this.getPosition().getY() == 1) {
                 p.moveUpLeft();
                 if (p.isValidPosition()) {
-                    if (cb.byPosition(p).isEmpty()) {
+                    if (cb.getSquareByPosition(p).isEmpty()) {
                         list.add(new Position(p));
                     }
                 }
@@ -58,22 +59,22 @@ public class Pawn extends Piece {
         if(numPlayer==2) {
             p.moveDown();
             if (p.isValidPosition()) {
-                if (cb.byPosition(p).isEmpty()) {
+                if (cb.getSquareByPosition(p).isEmpty()) {
                     list.add(new Position(p));
                 }
             }
             p.moveLeft();
             if (p.isValidPosition()) {
-                if (!cb.byPosition(p).isEmpty()) {
-                    if (isEnemy(cb.byPosition(p).getPiece())) {
+                if (!cb.getSquareByPosition(p).isEmpty()) {
+                    if (isEnemy(cb.getSquareByPosition(p).getPiece())) {
                         list.add(new Position(p));
                     }
                 }
             }
             p.moveRight(2);
             if (p.isValidPosition()) {
-                if (!cb.byPosition(p).isEmpty()) {
-                    if (isEnemy(cb.byPosition(p).getPiece())) {
+                if (!cb.getSquareByPosition(p).isEmpty()) {
+                    if (isEnemy(cb.getSquareByPosition(p).getPiece())) {
                         list.add(new Position(p));
                     }
                 }
@@ -81,7 +82,7 @@ public class Pawn extends Piece {
             if (this.getPosition().getY() == 6) {
                 p.moveDownLeft();
                 if (p.isValidPosition()) {
-                    if (cb.byPosition(p).isEmpty()) {
+                    if (cb.getSquareByPosition(p).isEmpty()) {
                         list.add(new Position(p));
                     }
                 }

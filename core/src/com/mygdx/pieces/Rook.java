@@ -4,7 +4,12 @@ import com.mygdx.game.ChessBoard;
 import com.mygdx.game.Player;
 import com.mygdx.game.Position;
 import com.mygdx.game.PositionList;
-
+/*
+* Todas as peças individuais estendem à Piece, e implementam um construtor (que recebe o jogador e a posição inicial)
+* E um método canGo que basicamente implementa a Lógica de movimentação da peça.
+* Este método canGo recebe um tabuleiro e, a partir dele, a peça, sabendo sua posição, retorna uma lista
+* de posições para onde ela pode ir.
+* */
 public class Rook extends Piece {
 
 
@@ -23,10 +28,10 @@ public class Rook extends Piece {
         while (true){
             p.moveUp();
             if (p.isValidPosition()) {
-                if (cb.byPosition(p).isEmpty()) {
+                if (cb.getSquareByPosition(p).isEmpty()) {
                     list.add(new Position(p));
                 }else{
-                    if(isEnemy(cb.byPosition(p).getPiece())){
+                    if(isEnemy(cb.getSquareByPosition(p).getPiece())){
                         list.add(new Position(p));
                     }
                     break;
@@ -41,10 +46,10 @@ public class Rook extends Piece {
         while (true){
             p.moveDown();
             if (p.isValidPosition()) {
-                if (cb.byPosition(p).isEmpty()) {
+                if (cb.getSquareByPosition(p).isEmpty()) {
                     list.add(new Position(p));
                 }else{
-                    if(isEnemy(cb.byPosition(p).getPiece())){
+                    if(isEnemy(cb.getSquareByPosition(p).getPiece())){
                         list.add(new Position(p));
                     }
                     break;
@@ -58,10 +63,10 @@ public class Rook extends Piece {
         while (true){
             p.moveRight();
             if (p.isValidPosition()) {
-                if (cb.byPosition(p).isEmpty()) {
+                if (cb.getSquareByPosition(p).isEmpty()) {
                     list.add(new Position(p));
                 }else{
-                    if(isEnemy(cb.byPosition(p).getPiece())){
+                    if(isEnemy(cb.getSquareByPosition(p).getPiece())){
                         list.add(new Position(p));
                     }
                     break;
@@ -75,10 +80,10 @@ public class Rook extends Piece {
         while (true){
             p.moveLeft();
             if (p.isValidPosition()) {
-                if (cb.byPosition(p).isEmpty()) {
+                if (cb.getSquareByPosition(p).isEmpty()) {
                     list.add(new Position(p));
                 }else{
-                    if(isEnemy(cb.byPosition(p).getPiece())){
+                    if(isEnemy(cb.getSquareByPosition(p).getPiece())){
                         list.add(new Position(p));
                     }
                     break;

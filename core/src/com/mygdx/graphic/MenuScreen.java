@@ -1,13 +1,10 @@
-package com.mygdx.screen;
+package com.mygdx.graphic;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.mygdx.drawable.DrawBoard;
-import com.mygdx.game.Chess;
 import com.mygdx.game.ChessBoard;
-import com.mygdx.game.EventHandler;
 import com.mygdx.game.Util;
 import com.mygdx.pieces.King;
 import com.mygdx.pieces.Pawn;
@@ -20,7 +17,7 @@ public class MenuScreen implements Screen{
     Chess game;
     ChessBoard cb;
     EventHandler eventHandler;
-    DrawBoard board;
+    BoardDrawer board;
     OrthographicCamera camera;
     Pawn pawn;
     King king;
@@ -31,7 +28,7 @@ public class MenuScreen implements Screen{
         this.eventHandler=eventHandler;
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Util.SCREEN_WIDTH, Util.SCREEN_HEIGHT);
-        board = new DrawBoard(cb, game.sb);
+        board = new BoardDrawer(cb, game.sb);
     }
 
     @Override
@@ -43,6 +40,10 @@ public class MenuScreen implements Screen{
     public void render(float delta) {
         Gdx.gl.glClearColor(0.3f, 0.5f, 0.9f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        /*Esse trecho de código deixa a renderização mais lenta, pois os cliques do mouse eram interpre
+        * tados como multiplos cliques
+        * */
         Gdx.graphics.setContinuousRendering(false);
         if(Gdx.graphics.getDeltaTime()>5)
             Gdx.graphics.requestRendering();
@@ -56,9 +57,11 @@ public class MenuScreen implements Screen{
 
         game.sb.begin();
 
+        /*Imprime as texturas em camadas (ordem importa)*/
         board.drawBoard();
-        eventHandler.highLightPath();
+        eventHandler.pathHighLighter();
         board.drawPieces();
+
         game.sb.end();
 
     }
@@ -85,6 +88,7 @@ public class MenuScreen implements Screen{
 
     @Override
     public void dispose() {
-
+        board.dispose();
+        game.dispose();
     }
 }

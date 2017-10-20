@@ -1,5 +1,20 @@
 package com.mygdx.game;
 
+
+/*
+* Este é um tipo abstrato de dados que eu criei para auxiliar no jogo.
+* Basicamente, uma posição é uma tupla com dois inteiros.
+* Internamente, a classe position sempre armazena (0-?,0-7), que seriam os indexadores
+* da matriz[8][8] que é o tabuleiro.
+*
+* Porém, como num tabuleiro de xadrez normal, as posições sao marcadas por
+* A-H (no eixo horizontal) e 1-8 (no eixo vertical), a classe position também dá suporte a
+* esse formato no seu contrutor e no método setPosition, porém, sempre salvando internamente como (0-?,0-7)
+*
+* */
+
+
+
 public class Position {
     private int X;
     private int Y;
@@ -107,17 +122,14 @@ public class Position {
         this.moveDown(i);
         this.moveRight(i);
     }
+
+
     public boolean isValidPosition() {
         if (X < 0 || Y < 0 || X > 7 || Y > 7){
             return false;
         }
         return true;
     }
-
-
-
-
-
 
 
 }

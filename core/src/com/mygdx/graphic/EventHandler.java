@@ -1,78 +1,44 @@
-package com.mygdx.game;
+package com.mygdx.graphic;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.drawable.DrawBoard;
-
-import java.util.concurrent.TimeUnit;
+import com.mygdx.game.*;
+import com.mygdx.pieces.Piece;
 
 public class EventHandler {
 
-    ChessBoard cb;
+    ChessTable ct;
     SpriteBatch sb;
-    DrawBoard db;
-    Player pl;
+    BoardDrawer db;
     PositionList posList=null;
-    Square selected;
+    Piece selected;
     int k;
 
-    public EventHandler(ChessBoard cb, DrawBoard db, Player pl) {
-        this.cb = cb;
+    public EventHandler(ChessTable ct, BoardDrawer db) {
+        this.ct = ct;
         this.db = db;
-        this.pl = pl;
     }
 
 
     public void listen() {
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)) {
-
-        }
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.A)) {
-
-        }
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
-
-
-        }
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
-
-
-        }
-
-        if (Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
-
-
-        }
-
-        if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) {
-
-
-        }
-
         if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
-            int i = Gdx.input.getX()/Util.SQUARE_WIDTH;
+            int i = Gdx.input.getX()/ Util.SQUARE_WIDTH;
             int j = (Util.SCREEN_HEIGHT - Gdx.input.getY())/ Util.SQUARE_HEIGHT;
             selectionHandler( i, j);
         }
-
-
     }
 
     private void selectionHandler(int i, int j){
         if(selected == null) {
-            if (cb.getSquare(i, j).hasPiece()) {
-                selected = cb.getSquare(i, j);
-                posList = selected.getPiece().canGo(cb);
+            if (ct.getSquare(i, j).hasPiece()) {
+                selected = ct.getSquare(i, j).getPiece();
+                posList = selected.canGo(ct);
             }else{
                 return;
             }
-        }else if(cb.requestMove(pl,selected.getPosition(), new Position(i,j))){
+        }else if(ct.requestMove(selected.getPlayer(), selected.getPosition(), new Position(i,j))){
                 selected = null;
                 posList = null;
                 return;
@@ -81,16 +47,16 @@ public class EventHandler {
         selected = null;
         posList=null;
 
-        if(cb.getSquare(i,j).hasPiece()){
-            if(cb.getSquare(i,j).getPiece().getPlayer() == pl){
-                selected = cb.getSquare(i,j);
-                posList = selected.getPiece().canGo(cb);
+        if(ct.getSquare(i,j).hasPiece()){
+            if(ct.getSquare(i,j).getPiece().getPlayer().getNumber() == ct.getWhoseTurn()){
+                selected = ct.getSquare(i,j).getPiece();
+                posList = selected.canGo(ct);
             }
         }
     }
 
 
-    public void highLightPath(){
+    public void pathHighLighter(){
         if(posList!=null){
             for(int i=0; i<posList.size(); i++){
                 if((posList.get(i).getY()+posList.get(i).getX())%2==0) {

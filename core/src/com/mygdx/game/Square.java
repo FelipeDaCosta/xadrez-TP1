@@ -1,10 +1,11 @@
 package com.mygdx.game;
 
-import com.mygdx.drawable.Drawable;
 import com.mygdx.pieces.*;
 
-/**
- * Created by felipecosta on 10/2/17.
+/*
+*   Classe Square, basicamente, um tabuleiro será uma matriz de Squares
+*   Atributos: posição X e Y (0-7,0-7), vazio, e peça (se houver)
+*
  */
 public class Square{
 
@@ -32,13 +33,8 @@ public class Square{
 
     }
 
-    /*Temporarios*/
     public void setEmpty(){
         this.empty=true;
-    }
-    public void putPieceByForce(Piece p){
-        this.piece = p;
-        this.empty=false;
     }
 
     public Piece takePiece() {
@@ -46,11 +42,11 @@ public class Square{
             empty = true;
             return piece;
         }
-        System.out.println("Erro, você tentou tirar uma peça da casa "+X+" "+Y+" que esta vazia!");
         return null;
     }
 
     public Piece getPiece(){
+
         return this.piece;
     }
 
