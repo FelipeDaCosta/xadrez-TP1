@@ -38,9 +38,11 @@ public class EventHandler {
             if (ct.getSquare(i, j).hasPiece()){
                 //comentado para que o usuario jogue pelos 2
                 //if(ct.getSquare(i,j).getPiece().getPlayer() == pl) {
-                    selected = ct.getSquare(i, j).getPiece();
-                    posList = selected.canGo(ct);
-                    return;
+                    if(ct.getSquare(i,j).getPiece().getPlayer().getNumber()==ct.getWhoseTurn()) {
+                        selected = ct.getSquare(i, j).getPiece();
+                        posList = selected.canGo(ct);
+                        return;
+                    }
                 //}
             }else{
                 return;
@@ -57,8 +59,10 @@ public class EventHandler {
         if(ct.getSquare(i,j).hasPiece()){
             // comentado pra que o usuario jogue pelos 2
             //if(ct.getSquare(i,j).getPiece().getPlayer() == pl){
-                selected = ct.getSquare(i,j).getPiece();
-                posList = selected.canGo(ct);
+                if(ct.getSquare(i,j).getPiece().getPlayer().getNumber()==ct.getWhoseTurn()) {
+                    selected = ct.getSquare(i, j).getPiece();
+                    posList = selected.canGo(ct);
+                }
             //}
         }
     }

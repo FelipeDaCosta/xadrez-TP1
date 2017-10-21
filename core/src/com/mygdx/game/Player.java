@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 public class Player {
 
+    Player enemy;
     private String name;
     private int numPlayer;
     private boolean myTurn=false;
@@ -91,6 +92,10 @@ public class Player {
         }
     }
 
+    public void setEnemy(Player enemy) {
+        this.enemy = enemy;
+    }
+
     public boolean getTurn(){
         return myTurn;
     }
@@ -101,6 +106,10 @@ public class Player {
 
     public String getName(){
         return this.name;
+    }
+
+    public Position getKingPosition(){
+        return king.getPosition();
     }
 
     public int getNumber(){

@@ -8,11 +8,10 @@ import com.mygdx.pieces.*;
 * O que JÁ está implementado:
 * Era a vez do jogador?
 * Ele está movimentando sua própria peça?
-* Essa peça pode ir pra onde ele quer? (baseado na lista canGo de cada peça)
+* Essa peça pode ir pra onde ele quer?
+* Essa jogada deixa o rei vulnerável?
 *
 * O que FALTA implementar:
-* Essa jogada deixa o rei vulnerável?
-* O jogador estava em cheque?
 * Essa jogada é um cheque-mate?
 *
 * */
@@ -49,6 +48,22 @@ public class ChessLogic {
         return false;
     }
 
+    public boolean isKingInDanger(ChessBoard cb, Player p){
+        PieceList enemyPieces = p.enemy.getPieces();
+        PositionList allCanGo = new PositionList();
+
+        for(int i=0; i< enemyPieces.size(); i++){
+           if(enemyPieces.get(i).isOnTheGame())
+                allCanGo.addAll(enemyPieces.get(i).canGo(cb));
+        }
+
+        if(isOnTheList(allCanGo,p.getKingPosition()))
+            return true;
+
+        return false;
+    }
+
+
     private boolean isOnTheList(PositionList list, Position p){
         int size = list.size();
         for(int i=0; i<size; i++){
@@ -65,6 +80,11 @@ public class ChessLogic {
 
     public boolean isMovingHisOwnPiece(Player p, Piece piece, ChessBoard cb){
         return (piece.getNumPlayer()==p.getNumber());
+    }
+
+    public boolean isCheckMate(ChessTable ct, Player pl){
+
+        return false;
     }
 
 

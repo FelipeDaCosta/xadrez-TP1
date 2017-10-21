@@ -46,7 +46,6 @@ public class Square{
     }
 
     public Piece getPiece(){
-
         return this.piece;
     }
 

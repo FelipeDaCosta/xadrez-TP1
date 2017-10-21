@@ -31,6 +31,13 @@ public class ChessBoard {
         piece.setPosition(destination);
     }
 
+    protected void unmove(Position source, Position destination){
+        Piece piece = this.getSquareByPosition(destination).takePiece();
+        this.getSquareByPosition(source).putPiece(piece);
+        piece.setPosition(source);
+
+    }
+
     /*Este método imprime o tabuleiro na linha de comando num formato "bonitinho"*/
     public void printBoard(){
         for(int j=7; j>-1; j--){

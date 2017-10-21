@@ -38,6 +38,9 @@ public abstract class Piece{
     public void kill(){
         this.onTheGame = false;
     }
+    public void revive(){
+        this.onTheGame = true;
+    }
 
     public PieceCode getPieceCode() {
         return this.pieceCode;
