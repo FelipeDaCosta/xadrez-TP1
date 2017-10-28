@@ -38,6 +38,18 @@ public class ChessBoard {
 
     }
 
+    /*Este método imprime o MENU na linha de comando*/
+    public void printMenu(){
+        System.out.println(" -------------------------");
+        System.out.println("|                         |");
+        System.out.println("| (1)Procurar uma Partida |");
+        System.out.println("|                         |");
+        System.out.println("| (2)Sair                 |");
+        System.out.println("|                         |");
+        System.out.println(" -------------------------");
+        System.out.println();
+    }
+
     /*Este método imprime o tabuleiro na linha de comando num formato "bonitinho"*/
     public void printBoard(){
         for(int j=7; j>-1; j--){

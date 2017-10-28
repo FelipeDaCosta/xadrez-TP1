@@ -30,6 +30,8 @@ public class XadrezNaLinhaDeComando {
         ChessTable chessTable = new ChessTable();
         p1 = chessTable.join();
         p2 = chessTable.join();
+        boolean firstTurn = true;
+        String player1 = "XXX", player2 = "YYY";
 
 
 
@@ -45,6 +47,27 @@ public class XadrezNaLinhaDeComando {
         Scanner keyboard = new Scanner(System.in);
         while(true) {
             System.out.println();
+            if(firstTurn) {
+                chessTable.printMenu();
+                String line;
+                do {
+                    System.out.print("Choice: ");
+                    line = keyboard.nextLine();
+                }while(line.charAt(0) != '1' && line.charAt(0) != '2');
+                switch(line.charAt(0)) {
+                    case ('1'):
+                        System.out.print("Player 1 name: ");
+                        player1 = keyboard.nextLine();
+                        System.out.print("Player 2 name: ");
+                        player2 = keyboard.nextLine();
+                        break;
+                    case ('2'):
+                        System.exit(0);
+                        break;
+                }
+                firstTurn = false;
+            }
+            System.out.println();
             chessTable.printBoard();
             System.out.println();
             char Xs;
@@ -52,7 +75,11 @@ public class XadrezNaLinhaDeComando {
             char Xd ;
             char Yd;
             while(true){
-                System.out.println("Jogada do Player "+chessTable.getWhoseTurn()+": "); // getWhoseTurn é quem tem a vez.
+                if(chessTable.getWhoseTurn() == 1)
+                    System.out.println("Jogada do Player "+player1+": ");
+                else
+                    System.out.println("Jogada do Player "+player2+": ");
+                //System.out.println("Jogada do Player "+chessTable.getWhoseTurn()+": "); // getWhoseTurn é quem tem a vez.
                 String line = keyboard.nextLine();
                 if(line.length()==4){
                     Xs = line.charAt(0);
