@@ -12,7 +12,7 @@ public class Chess extends Game {
 	public void create() {
         sb = new SpriteBatch();
 
-        /* Dinâmica de criação de um jogo. PARA TESTES */
+        /*// Dinâmica de criação de um jogo. PARA TESTES
         Player p1;
         Player p2;
         ChessTable ct = new ChessTable();
@@ -20,8 +20,8 @@ public class Chess extends Game {
         p2 = ct.join();
 
         BoardDrawer db = new BoardDrawer(ct,sb);
-        EventHandler eventHandler = new EventHandler(ct, db, p1);
-        this.setScreen(new MenuScreen(this, eventHandler, ct));
+        EventHandler eventHandler = new EventHandler(ct, db, p1);8*/
+        this.setScreen(new MainMenuScreen(this));//MenuScreen(this, eventHandler, ct));
 	}
 
     public void render() {

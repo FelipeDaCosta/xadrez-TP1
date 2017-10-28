@@ -21,14 +21,16 @@ public class MenuScreen implements Screen{
     OrthographicCamera camera;
     Pawn pawn;
     King king;
+    public String username;
 
-    public MenuScreen(Chess game, EventHandler eventHandler, ChessBoard cb) {
+    public MenuScreen(Chess game, EventHandler eventHandler, ChessBoard cb, String name) {
         this.game = game;
         this.cb = cb;
         this.eventHandler=eventHandler;
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Util.SCREEN_WIDTH, Util.SCREEN_HEIGHT);
         board = new BoardDrawer(cb, game.sb);
+        username = name;
     }
 
     @Override
