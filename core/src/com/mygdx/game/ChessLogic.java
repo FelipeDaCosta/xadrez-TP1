@@ -2,20 +2,6 @@ package com.mygdx.game;
 
 import com.mygdx.pieces.*;
 
-/*
-* Esta é uma classe auxiliar que analisa os movimentos,
-*
-* O que JÁ está implementado:
-* Era a vez do jogador?
-* Ele está movimentando sua própria peça?
-* Essa peça pode ir pra onde ele quer?
-* Essa jogada deixa o rei vulnerável?
-*
-* O que FALTA implementar:
-* Essa jogada é um cheque-mate?
-*
-* */
-
 public class ChessLogic {
 
     public ChessLogic(){
@@ -46,7 +32,7 @@ public class ChessLogic {
             return false;
         }
 
-        if(!willKingSurvive(cb,p,source,dest)) {
+        if(!willKingSurviveMove(cb,p,source,dest)) {
             System.out.println("Movimento negado por ser suicidio do Rei.");
             return false;
         }
@@ -115,7 +101,7 @@ public class ChessLogic {
                 positions = piece.canGo(cb);
                 for(int j=0; j<positions.size(); j++){
                     position = positions.get(j);
-                    if(willKingSurvive(cb, pl, piece.getPosition(), position)){
+                    if(willKingSurviveMove(cb, pl, piece.getPosition(), position)){
                         pieces = null;
                         positions = null;
                         return false;
@@ -130,7 +116,7 @@ public class ChessLogic {
         return false;
     }
 
-    public boolean willKingSurvive(ChessBoard cb, Player pl, Position source, Position dest){
+    public boolean willKingSurviveMove(ChessBoard cb, Player pl, Position source, Position dest){
         Piece enemyPiece = null;
         boolean resp = true;
 
