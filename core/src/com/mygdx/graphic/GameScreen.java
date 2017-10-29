@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.mygdx.game.ChessBoard;
+import com.mygdx.game.ChessTable;
 import com.mygdx.game.Util;
 import com.mygdx.pieces.King;
 import com.mygdx.pieces.Pawn;
@@ -12,24 +13,22 @@ import com.mygdx.pieces.Pawn;
 /**
  * Created by felipecosta on 10/2/17.
  */
-public class MenuScreen implements Screen{
+public class GameScreen implements Screen{
 
     Chess game;
-    ChessBoard cb;
+    ChessTable ct;
     EventHandler eventHandler;
     BoardDrawer board;
     OrthographicCamera camera;
-    Pawn pawn;
-    King king;
     public String username;
 
-    public MenuScreen(Chess game, EventHandler eventHandler, ChessBoard cb, String name) {
+    public GameScreen(Chess game, EventHandler eventHandler, ChessTable ct, String name) {
         this.game = game;
-        this.cb = cb;
+        this.ct = ct;
         this.eventHandler=eventHandler;
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Util.SCREEN_WIDTH, Util.SCREEN_HEIGHT);
-        board = new BoardDrawer(cb, game.sb);
+        board = new BoardDrawer(ct, game.sb);
         username = name;
     }
 

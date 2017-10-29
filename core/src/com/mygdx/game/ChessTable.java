@@ -13,8 +13,6 @@ package com.mygdx.game;
 * */
 
 
-import com.mygdx.pieces.Piece;
-
 public class ChessTable extends ChessBoard {
 
     private int numPlayers=0;
@@ -51,38 +49,27 @@ public class ChessTable extends ChessBoard {
     }
 
     public boolean requestMove(Player p, Position source, Position dest){
-        Piece enemyPiece = null;
-        if(super.getSquareByPosition(source).isEmpty()){
-            System.out.println("Não há peça na casa de origem do movimento");
-            return false;
-        }
 
         //manda a jogada para análise da classe chessLogic
-        if(!chessLogic.moveAnalisys(this, p, super.getSquareByPosition(source).getPiece(),dest)) {
-            System.out.println("Jogada não consentida.");
+        if(!chessLogic.moveAnalisys(this, p, source, dest)) {
             return false;
         }
-        if(super.getSquareByPosition(dest).hasPiece()){
-            enemyPiece = getSquareByPosition(dest).getPiece();
-            enemyPiece.kill();
-        }
-        super.move(source, dest);
-        if(chessLogic.isKingInDanger(this,p)) {
-            unmove(source, dest);
-            if (enemyPiece != null){
-                enemyPiece.revive();
-                this.getSquareByPosition(dest).putPiece(enemyPiece);
-            }
-            System.out.println("Movimento negado por ser suicidio do Rei.");
-            return false;
-        }
-        p.enemy.refresh();
-        if(chessLogic.isKingInDanger(this, p.enemy)){
-            if(chessLogic.isCheckMate(this,  p.enemy)){
 
-            }
+        this.move(source, dest);
+        p.refresh();
+        p.enemy.refresh();
+
+        if(chessLogic.isUnderCheckMate(this,  p.enemy)){
+            System.out.println("Check Mate! "+p.getName()+" venceu!");
+            player1.setTurn(false);
+            player2.setTurn(false);
+            //Aqui faz alguma coisa pra acabar o jogo.
         }
         changeTurn();
+
+        if(chessLogic.isKingInDanger(this, p.enemy)){
+            System.out.println(p.enemy.getName()+" está em Cheque!");
+        }
         return true;
     }
 

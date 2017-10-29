@@ -12,30 +12,49 @@ import com.mygdx.pieces.*;
 
 public class ChessBoard {
     private Square[][] board = new Square[8][8];
-
+    private Piece lastKilled=null;
+    private Position lastSource;
+    private Position lastDestination;
     ChessLogic chessLogic = new ChessLogic();
     public ChessBoard(){
-
         for(int i=0; i<8; i++){
             for(int j=0; j<8; j++){
                 board[i][j] = new Square(i,j);
             }
         }
-
     }
 
     protected void move(Position source, Position destination){
-        Piece piece = this.getSquareByPosition(source).getPiece();
+        if(this.getSquareByPosition(source).isEmpty())
+            return;
+
+        if(this.getSquareByPosition(destination).hasPiece()){
+            lastKilled = this.getSquareByPosition(destination).getPiece();
+            this.getSquareByPosition(destination).getPiece().kill();
+        }else{
+            lastKilled = null;
+        }
+
+        Piece piece = this.getSquareByPosition(source).takePiece();
         this.getSquareByPosition(destination).putPiece(piece);
-        this.getSquareByPosition(piece.getPosition()).setEmpty();
+        this.getSquareByPosition(source).setEmpty();
         piece.setPosition(destination);
+        lastSource = source;
+        lastDestination = destination;
     }
 
-    protected void unmove(Position source, Position destination){
-        Piece piece = this.getSquareByPosition(destination).takePiece();
-        this.getSquareByPosition(source).putPiece(piece);
-        piece.setPosition(source);
+    protected void unmove(){
 
+        Piece piece = this.getSquareByPosition(this.lastDestination).takePiece();
+        this.getSquareByPosition(this.lastSource).putPiece(piece);
+        this.getSquareByPosition(this.lastDestination).setEmpty();
+        piece.setPosition(this.lastSource);
+
+        if(this.lastKilled!=null){
+            this.lastKilled.revive();
+            this.getSquareByPosition(this.lastDestination).putPiece(this.lastKilled);
+            this.lastKilled=null;
+        }
     }
 
     /*Este método imprime o MENU na linha de comando*/

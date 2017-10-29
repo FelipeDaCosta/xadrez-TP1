@@ -85,10 +85,56 @@ public class Player {
     }
 
     public void refresh(){
-        for(int i=0; i<pieces.size(); i++){
-            if(!pieces.get(i).isOnTheGame()){
-                pieces.remove(pieces.get(i));
-            }
+
+        this.pieces.clear();
+
+        if(pawn1.isOnTheGame()) {
+            pieces.add(pawn1);
+        }
+        if(pawn2.isOnTheGame()) {
+            pieces.add(pawn2);
+        }
+        if(pawn3.isOnTheGame()) {
+            pieces.add(pawn3);
+        }
+        if(pawn4.isOnTheGame()) {
+            pieces.add(pawn4);
+        }
+        if(pawn5.isOnTheGame()) {
+            pieces.add(pawn5);
+        }
+        if(pawn6.isOnTheGame()) {
+            pieces.add(pawn6);
+        }
+        if(pawn7.isOnTheGame()) {
+            pieces.add(pawn7);
+        }
+        if(pawn8.isOnTheGame()) {
+            pieces.add(pawn8);
+        }
+        if(rook1.isOnTheGame()) {
+            pieces.add(rook1);
+        }
+        if(rook2.isOnTheGame()) {
+            pieces.add(rook2);
+        }
+        if(bishop1.isOnTheGame()) {
+            pieces.add(bishop1);
+        }
+        if(bishop2.isOnTheGame()) {
+            pieces.add(bishop2);
+        }
+        if(knight1.isOnTheGame()) {
+            pieces.add(knight1);
+        }
+        if(knight2.isOnTheGame()) {
+            pieces.add(knight2);
+        }
+        if(king.isOnTheGame()) {
+            pieces.add(king);
+        }
+        if(queen.isOnTheGame()) {
+            pieces.add(queen);
         }
     }
 

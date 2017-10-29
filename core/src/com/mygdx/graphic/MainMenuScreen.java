@@ -58,7 +58,7 @@ public class MainMenuScreen implements Screen {
 
                 BoardDrawer db = new BoardDrawer(ct,game.sb);
                 EventHandler eventHandler = new EventHandler(ct, db, p1);
-                game.setScreen(new MenuScreen(game, eventHandler, ct, ""));
+                game.setScreen(new GameScreen(game, eventHandler, ct, ""));
             }
         }else
             game.sb.draw(startGameInactive, Util.SCREEN_WIDTH/2 - 146, 300, 292, 67);

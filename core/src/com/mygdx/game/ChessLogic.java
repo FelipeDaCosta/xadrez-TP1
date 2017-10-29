@@ -22,31 +22,38 @@ public class ChessLogic {
 
     }
 
-    public boolean moveAnalisys(ChessBoard cb, Player p, Piece piece, Position dest){
-        PositionList list = new PositionList();
+    public boolean moveAnalisys(ChessBoard cb, Player p, Position source, Position dest){
+        Piece piece;
         if(!isTurn(p)){
             System.out.println("Aguarde a jogada do seu oponente");
             return false;
         }
 
-        if(!isMovingHisOwnPiece(p, piece, cb)){
+        if(!isThereSomePiece(cb,source)){
+            System.out.println("Não há peça na casa de origem do movimento");
+            return false;
+        }
+
+        piece = cb.getSquareByPosition(source).getPiece();
+
+        if(!isMovingHisOwnPiece(p, piece)){
             System.out.println("Você só pode mover suas proprias peças..");
             return false;
         }
 
-        list = piece.canGo(cb);
-        //list.printListPositions(piece.getPieceCode()+""+piece.getPlayer().getNumber()+" can go to:");
-        //list.printListPieces("", cb);
-        if(isOnTheList(list, dest)){
-            //System.out.println("Posição foi encontrada dentro da lista canGo!");
-            list.clear();
-            return true;
-        }else {
-           //System.out.println("Posição não foi encontrada dentro da lista canGo!");
+        if(!pieceCanGo(cb, piece, dest)){
+            System.out.println("Peça não pode ir para o destino selecionado.");
+            return false;
         }
-        list.clear();
-        return false;
+
+        if(!willKingSurvive(cb,p,source,dest)) {
+            System.out.println("Movimento negado por ser suicidio do Rei.");
+            return false;
+        }
+
+        return true;
     }
+
 
     public boolean isKingInDanger(ChessBoard cb, Player p){
         PieceList enemyPieces = p.enemy.getPieces();
@@ -60,6 +67,17 @@ public class ChessLogic {
         if(isOnTheList(allCanGo,p.getKingPosition()))
             return true;
 
+        return false;
+    }
+
+    private boolean pieceCanGo(ChessBoard cb, Piece piece, Position dest){
+        PositionList list;
+        list = piece.canGo(cb);
+        if(isOnTheList(list, dest)){
+            list.clear();
+            return true;
+        }
+        list.clear();
         return false;
     }
 
@@ -78,14 +96,62 @@ public class ChessLogic {
         return p.getTurn();
     }
 
-    public boolean isMovingHisOwnPiece(Player p, Piece piece, ChessBoard cb){
+    public boolean isMovingHisOwnPiece(Player p, Piece piece){
         return (piece.getNumPlayer()==p.getNumber());
     }
 
-    public boolean isCheckMate(ChessTable ct, Player pl){
+    public boolean isUnderCheckMate(ChessBoard cb, Player pl){
+        PieceList pieces;
+        Piece piece;
+        PositionList positions;
+        Position position;
+
+        if(isKingInDanger(cb, pl)){
+            pieces = pl.getPieces();
+
+
+            for(int i=0; i<pieces.size(); i++){
+                piece = pieces.get(i);
+                positions = piece.canGo(cb);
+                for(int j=0; j<positions.size(); j++){
+                    position = positions.get(j);
+                    if(willKingSurvive(cb, pl, piece.getPosition(), position)){
+                        pieces = null;
+                        positions = null;
+                        return false;
+                    }
+                }
+            }
+            pieces = null;
+            positions = null;
+            return true;
+        }
 
         return false;
     }
 
+    public boolean willKingSurvive(ChessBoard cb, Player pl, Position source, Position dest){
+        Piece enemyPiece = null;
+        boolean resp = true;
+
+        cb.move(source, dest);
+        pl.refresh();
+        pl.enemy.refresh();
+
+        if(isKingInDanger(cb,pl)){
+            resp = false;
+        }
+
+        cb.unmove();
+        pl.refresh();
+        pl.enemy.refresh();
+
+        return resp;
+    }
+
+
+    public boolean isThereSomePiece(ChessBoard cb, Position position){
+        return !cb.getSquareByPosition(position).isEmpty();
+    }
 
 }

@@ -21,7 +21,7 @@ public class Chess extends Game {
 
         BoardDrawer db = new BoardDrawer(ct,sb);
         EventHandler eventHandler = new EventHandler(ct, db, p1);8*/
-        this.setScreen(new MainMenuScreen(this));//MenuScreen(this, eventHandler, ct));
+        this.setScreen(new MainMenuScreen(this));//GameScreen(this, eventHandler, ct));
 	}
 
     public void render() {

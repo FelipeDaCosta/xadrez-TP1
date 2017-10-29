@@ -78,7 +78,7 @@ public class PlayOnlineMenuScreen implements Screen {
 
             BoardDrawer db = new BoardDrawer(ct, game.sb);
             EventHandler eventHandler = new EventHandler(ct, db, p1);
-            game.setScreen(new MenuScreen(game, eventHandler, ct, username));
+            game.setScreen(new GameScreen(game, eventHandler, ct, username));
         }
         if(Gdx.input.getX() > 154 && Gdx.input.getX() < 446 && Gdx.input.getY() > 350 && Gdx.input.getY() < 417) {
             game.sb.draw(backGameActive, Util.SCREEN_WIDTH / 2 - 146, 183, 292, 67);
