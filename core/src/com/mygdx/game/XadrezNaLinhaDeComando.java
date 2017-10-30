@@ -111,16 +111,6 @@ public class XadrezNaLinhaDeComando {
                 chessTable.requestMove(p2, new Position(Xs, (int) Ys - 48), new Position(Xd, (int) Yd - 48));
             }
 
-            /*
-            * Todos os movimentos acontecem através da função requestMove.
-            * O player manda as posições de origem e destino do movimento, e toda a requisição será processada
-            * internamente pela classe chessTable em conjunto com a classe ChessLogic
-            *
-            * Quando o movimento é bem sucedido, a classe chessTable passa a vez para o seu oponente;
-            *
-            * */
-
-
 
         }
 

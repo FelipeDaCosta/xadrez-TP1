@@ -15,7 +15,7 @@ public class ChessBoard {
     private Piece lastKilled=null;
     private Position lastSource;
     private Position lastDestination;
-    ChessLogic chessLogic = new ChessLogic();
+
     public ChessBoard(){
         for(int i=0; i<8; i++){
             for(int j=0; j<8; j++){

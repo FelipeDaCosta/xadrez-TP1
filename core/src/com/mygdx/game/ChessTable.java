@@ -14,13 +14,11 @@ package com.mygdx.game;
 
 
 public class ChessTable extends ChessBoard {
-
     private int numPlayers=0;
     private int whoseTurn=1;
     private Player player1;
     private Player player2;
     private ChessLogic chessLogic = new ChessLogic();
-    
 
     public Player join(){
         if(numPlayers==0) {
@@ -47,7 +45,6 @@ public class ChessTable extends ChessBoard {
             return null;
         }
     }
-
     public boolean requestMove(Player p, Position source, Position dest){
 
         //manda a jogada para análise da classe chessLogic
@@ -65,21 +62,22 @@ public class ChessTable extends ChessBoard {
             player2.setTurn(false);
             //Aqui faz alguma coisa pra acabar o jogo.
         }
-        changeTurn();
 
+        changeTurn();
         if(chessLogic.isKingInDanger(this, p.enemy)){
+            p.enemy.setUnderCheck(true);
             System.out.println(p.enemy.getName()+" está em Cheque!");
+        }else{
+            p.enemy.setUnderCheck(false);
         }
         return true;
     }
-
     public void changeTurn(){
         if(whoseTurn==1) whoseTurn = 2;
         else whoseTurn=1;
         player1.setTurn(!player1.getTurn());
         player2.setTurn(!player2.getTurn());
     }
-
     public int getWhoseTurn(){
         return whoseTurn;
     }

@@ -2,7 +2,6 @@ package com.mygdx.game;
 
 
 import com.mygdx.pieces.*;
-import java.util.ArrayList;
 
 /*
 * Esta classe implementa o objeto jogador que basicamente tem uma lista de peças, a variável que diz se é sua vez
@@ -12,12 +11,11 @@ import java.util.ArrayList;
 
 
 public class Player {
-
-    Player enemy;
     private String name;
     private int numPlayer;
     private boolean myTurn=false;
-    private  PieceList pieces;
+    private boolean underCheck=false;
+    private  PieceList alivePieces;
     private  Pawn pawn1;
     private  Pawn pawn2;
     private  Pawn pawn3;
@@ -34,6 +32,7 @@ public class Player {
     private Rook rook2;
     private  Bishop bishop1;
     private  Bishop bishop2;
+    Player enemy;
 
 
     public Player(int numPlayer){
@@ -47,37 +46,37 @@ public class Player {
         pawn6 = new Pawn(this,'F', 2);
         pawn7 = new Pawn(this,'G', 2);
         pawn8 = new Pawn(this,'H', 2);
-        king = new King(this,'E', 1);
-        queen = new Queen(this,'D', 1);
+        king = new King(this,'D', 1);
+        queen = new Queen(this,'E', 1);
         knight1 = new Knight(this,'B', 1);
         knight2 = new Knight(this,'G', 1);
         rook1 = new Rook(this,'A', 1);
         rook2 = new Rook(this,'H', 1);
         bishop1 = new Bishop(this,'C', 1);
         bishop2 = new Bishop(this,'F', 1);
-        pieces = new PieceList();
+        alivePieces = new PieceList();
 
         if(numPlayer==2){
-            king.setPosition('D',1);
-            queen.setPosition('E',1);
+            king.setPosition('E',1);
+            queen.setPosition('D',1);
         }
 
-        pieces.add(pawn1);
-        pieces.add(pawn2);
-        pieces.add(pawn3);
-        pieces.add(pawn4);
-        pieces.add(pawn5);
-        pieces.add(pawn6);
-        pieces.add(pawn7);
-        pieces.add(pawn8);
-        pieces.add(rook1);
-        pieces.add(rook2);
-        pieces.add(bishop1);
-        pieces.add(bishop2);
-        pieces.add(knight1);
-        pieces.add(knight2);
-        pieces.add(king);
-        pieces.add(queen);
+        alivePieces.add(pawn1);
+        alivePieces.add(pawn2);
+        alivePieces.add(pawn3);
+        alivePieces.add(pawn4);
+        alivePieces.add(pawn5);
+        alivePieces.add(pawn6);
+        alivePieces.add(pawn7);
+        alivePieces.add(pawn8);
+        alivePieces.add(rook1);
+        alivePieces.add(rook2);
+        alivePieces.add(bishop1);
+        alivePieces.add(bishop2);
+        alivePieces.add(knight1);
+        alivePieces.add(knight2);
+        alivePieces.add(king);
+        alivePieces.add(queen);
     }
 
     public void setTurn(boolean b){
@@ -86,55 +85,55 @@ public class Player {
 
     public void refresh(){
 
-        this.pieces.clear();
+        this.alivePieces.clear();
 
         if(pawn1.isOnTheGame()) {
-            pieces.add(pawn1);
+            alivePieces.add(pawn1);
         }
         if(pawn2.isOnTheGame()) {
-            pieces.add(pawn2);
+            alivePieces.add(pawn2);
         }
         if(pawn3.isOnTheGame()) {
-            pieces.add(pawn3);
+            alivePieces.add(pawn3);
         }
         if(pawn4.isOnTheGame()) {
-            pieces.add(pawn4);
+            alivePieces.add(pawn4);
         }
         if(pawn5.isOnTheGame()) {
-            pieces.add(pawn5);
+            alivePieces.add(pawn5);
         }
         if(pawn6.isOnTheGame()) {
-            pieces.add(pawn6);
+            alivePieces.add(pawn6);
         }
         if(pawn7.isOnTheGame()) {
-            pieces.add(pawn7);
+            alivePieces.add(pawn7);
         }
         if(pawn8.isOnTheGame()) {
-            pieces.add(pawn8);
+            alivePieces.add(pawn8);
         }
         if(rook1.isOnTheGame()) {
-            pieces.add(rook1);
+            alivePieces.add(rook1);
         }
         if(rook2.isOnTheGame()) {
-            pieces.add(rook2);
+            alivePieces.add(rook2);
         }
         if(bishop1.isOnTheGame()) {
-            pieces.add(bishop1);
+            alivePieces.add(bishop1);
         }
         if(bishop2.isOnTheGame()) {
-            pieces.add(bishop2);
+            alivePieces.add(bishop2);
         }
         if(knight1.isOnTheGame()) {
-            pieces.add(knight1);
+            alivePieces.add(knight1);
         }
         if(knight2.isOnTheGame()) {
-            pieces.add(knight2);
+            alivePieces.add(knight2);
         }
         if(king.isOnTheGame()) {
-            pieces.add(king);
+            alivePieces.add(king);
         }
         if(queen.isOnTheGame()) {
-            pieces.add(queen);
+            alivePieces.add(queen);
         }
     }
 
@@ -163,7 +162,10 @@ public class Player {
     }
 
     public PieceList getPieces() {
-        return pieces;
+        return alivePieces;
     }
 
+    public void setUnderCheck(boolean underCheck) {
+        this.underCheck = underCheck;
+    }
 }
