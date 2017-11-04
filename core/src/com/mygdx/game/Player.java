@@ -46,8 +46,14 @@ public class Player {
         pawn6 = new Pawn(this,'F', 2);
         pawn7 = new Pawn(this,'G', 2);
         pawn8 = new Pawn(this,'H', 2);
-        king = new King(this,'D', 1);
-        queen = new Queen(this,'E', 1);
+        if(numPlayer==1) {
+            king = new King(this, 'E', 1);
+            queen = new Queen(this, 'D', 1);
+        }
+        else if(numPlayer==2){
+            king = new King(this, 'D',1);
+            queen = new Queen(this, 'E',1);
+        }
         knight1 = new Knight(this,'B', 1);
         knight2 = new Knight(this,'G', 1);
         rook1 = new Rook(this,'A', 1);
@@ -55,11 +61,6 @@ public class Player {
         bishop1 = new Bishop(this,'C', 1);
         bishop2 = new Bishop(this,'F', 1);
         alivePieces = new PieceList();
-
-        if(numPlayer==2){
-            king.setPosition('E',1);
-            queen.setPosition('D',1);
-        }
 
         alivePieces.add(pawn1);
         alivePieces.add(pawn2);

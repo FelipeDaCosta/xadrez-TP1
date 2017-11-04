@@ -55,7 +55,6 @@ public class Position {
         return this;
     }
     private void invert(){
-        X = 7 - X;
         Y = 7 - Y;
     }
 
