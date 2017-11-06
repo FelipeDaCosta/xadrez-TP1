@@ -46,8 +46,8 @@ public class Player {
         pawn6 = new Pawn(this,'F', 2);
         pawn7 = new Pawn(this,'G', 2);
         pawn8 = new Pawn(this,'H', 2);
-        king = new King(this,'D', 1);
-        queen = new Queen(this,'E', 1);
+        king = new King(this,'E', 1);
+        queen = new Queen(this,'D', 1);
         knight1 = new Knight(this,'B', 1);
         knight2 = new Knight(this,'G', 1);
         rook1 = new Rook(this,'A', 1);
@@ -57,8 +57,8 @@ public class Player {
         alivePieces = new PieceList();
 
         if(numPlayer==2){
-            king.setPosition('E',1);
-            queen.setPosition('D',1);
+            king.setPosition('D',1);
+            queen.setPosition('E',1);
         }
 
         alivePieces.add(pawn1);

@@ -29,6 +29,16 @@ public class Pawn extends Piece {
             if (p.isValidPosition()) {
                 if (cb.getSquareByPosition(p).isEmpty()) {
                     list.add(new Position(p));
+
+                    if (this.getPosition().getY() == 1) {
+                        p.moveUp();
+                        if (p.isValidPosition()) {
+                            if (cb.getSquareByPosition(p).isEmpty()) {
+                                list.add(new Position(p));
+                            }
+                        }
+                        p.moveDown();
+                    }
                 }
             }
             p.moveLeft();
@@ -47,20 +57,24 @@ public class Pawn extends Piece {
                     }
                 }
             }
-            if (this.getPosition().getY() == 1) {
-                p.moveUpLeft();
-                if (p.isValidPosition()) {
-                    if (cb.getSquareByPosition(p).isEmpty()) {
-                        list.add(new Position(p));
-                    }
-                }
-            }
+
         }
         if(numPlayer==2) {
             p.moveDown();
             if (p.isValidPosition()) {
                 if (cb.getSquareByPosition(p).isEmpty()) {
                     list.add(new Position(p));
+
+                if (this.getPosition().getY() == 6) {
+                    p.moveDown();
+                    if (p.isValidPosition()) {
+                        if (cb.getSquareByPosition(p).isEmpty()) {
+                            list.add(new Position(p));
+                        }
+                    }
+                    p.moveUp();
+                }
+
                 }
             }
             p.moveLeft();
@@ -79,14 +93,7 @@ public class Pawn extends Piece {
                     }
                 }
             }
-            if (this.getPosition().getY() == 6) {
-                p.moveDownLeft();
-                if (p.isValidPosition()) {
-                    if (cb.getSquareByPosition(p).isEmpty()) {
-                        list.add(new Position(p));
-                    }
-                }
-            }
+
         }
 
         return list;

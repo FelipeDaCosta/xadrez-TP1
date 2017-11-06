@@ -52,44 +52,44 @@ public class BoardDrawer extends Drawable {
         switch(code){
             case BSP:
                 if(num==1){
-                    return new Texture(Gdx.files.internal("bishop_black.png"));
-                }else if(num==2){
                     return new Texture(Gdx.files.internal("bishop_white.png"));
+                }else if(num==2){
+                    return new Texture(Gdx.files.internal("bishop_black.png"));
                 }
                 break;
             case KNG:
                 if(num==1){
-                    return new Texture(Gdx.files.internal("king_black.png"));
-                }else if(num==2){
                     return new Texture(Gdx.files.internal("king_white.png"));
+                }else if(num==2){
+                    return new Texture(Gdx.files.internal("king_black.png"));
                 }
                 break;
             case KNT:
                 if(num==1){
-                    return new Texture(Gdx.files.internal("knight_black.png"));
-                }else if(num==2){
                     return new Texture(Gdx.files.internal("knight_white.png"));
+                }else if(num==2){
+                    return new Texture(Gdx.files.internal("knight_black.png"));
                 }
                 break;
             case PAW:
                 if(num==1){
-                    return new Texture(Gdx.files.internal("pawn_black.png"));
-                }else if(num==2){
                     return new Texture(Gdx.files.internal("pawn_white.png"));
+                }else if(num==2){
+                    return new Texture(Gdx.files.internal("pawn_black.png"));
                 }
                 break;
             case QEN:
                 if(num==1){
-                    return new Texture(Gdx.files.internal("queen_black.png"));
-                }else if(num==2){
                     return new Texture(Gdx.files.internal("queen_white.png"));
+                }else if(num==2){
+                    return new Texture(Gdx.files.internal("queen_black.png"));
                 }
                 break;
             case ROK:
                 if(num==1){
-                    return new Texture(Gdx.files.internal("rook_black.png"));
-                }else if(num==2){
                     return new Texture(Gdx.files.internal("rook_white.png"));
+                }else if(num==2){
+                    return new Texture(Gdx.files.internal("rook_black.png"));
                 }
                 break;
         }
