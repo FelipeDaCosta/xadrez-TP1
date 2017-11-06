@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.ChessTable;
 import com.mygdx.game.Player;
 import com.mygdx.game.Util;
+import com.mygdx.web.Web;
 
 /**
  * Created by Iago on 10/27/2017.
@@ -66,7 +67,9 @@ public class MainMenuScreen implements Screen {
             game.sb.draw(startOnlineGameActive, Util.SCREEN_WIDTH / 2 - 146, 183, 292, 67);
             if(Gdx.input.isTouched()) {
                 this.dispose();
-                game.setScreen(new PlayOnlineMenuScreen(game));
+               // game.setScreen(new PlayOnlineMenuScreen(game));
+                Web.findGame();
+                game.setScreen(new WaitingPlayerScreen(game));
             }
         }else
             game.sb.draw(startOnlineGameInactive, Util.SCREEN_WIDTH/2 - 146, 183, 292, 67);
