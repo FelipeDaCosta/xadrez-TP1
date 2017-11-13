@@ -55,6 +55,9 @@ public class GameScreen implements Screen{
         camera.update();
         game.sb.setProjectionMatrix(camera.combined);
 
+        if(ct.cMate==1){
+            game.setScreen(new GameOver(game, ct.whoseTurn));
+        }
 
         game.sb.begin();
 
