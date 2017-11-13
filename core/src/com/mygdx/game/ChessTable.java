@@ -15,7 +15,8 @@ package com.mygdx.game;
 
 public class ChessTable extends ChessBoard {
     private int numPlayers=0;
-    private int whoseTurn=1;
+    public int cMate=0;
+    public int whoseTurn=1;
     private Player player1;
     private Player player2;
     private ChessLogic chessLogic = new ChessLogic();
@@ -60,6 +61,7 @@ public class ChessTable extends ChessBoard {
             System.out.println("Check Mate! "+p.getName()+" venceu!");
             player1.setTurn(false);
             player2.setTurn(false);
+            cMate=1;
             //Aqui faz alguma coisa pra acabar o jogo.
         }
 
