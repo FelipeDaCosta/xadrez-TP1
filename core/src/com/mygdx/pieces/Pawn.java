@@ -4,6 +4,7 @@ import com.mygdx.game.ChessBoard;
 import com.mygdx.game.Player;
 import com.mygdx.game.Position;
 import com.mygdx.game.PositionList;
+import com.mygdx.game.Square;
 
 /*
 * Todas as peças individuais estendem à Piece, e implementam um construtor (que recebe o jogador e a posição inicial)
@@ -12,6 +13,8 @@ import com.mygdx.game.PositionList;
 * de posições para onde ela pode ir.
 * */
 public class Pawn extends Piece {
+
+    private Square[][] board = new Square[8][8];
 
     public Pawn(Player p, char X, int Y){
         super(PieceCode.PAW, X,Y);
@@ -95,7 +98,6 @@ public class Pawn extends Piece {
             }
 
         }
-
         return list;
     }
 
