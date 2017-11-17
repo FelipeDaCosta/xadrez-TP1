@@ -2,6 +2,8 @@ package com.mygdx.game;
 
 import com.mygdx.pieces.*;
 
+import static com.mygdx.pieces.PieceCode.PAW;
+
 public class ChessLogic {
 
     public ChessLogic(){
@@ -110,6 +112,17 @@ public class ChessLogic {
             }
             pieces = null;
             positions = null;
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean pawnPromotion(ChessBoard cb, Position destination){
+        Piece piece = cb.getSquareByPosition(destination).getPiece();
+        int y = piece.getPosition().getY();
+
+        if(piece.getPieceCode() == PAW && (y == 0 || y== 7)){
             return true;
         }
 

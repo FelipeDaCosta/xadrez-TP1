@@ -13,6 +13,8 @@ package com.mygdx.game;
 * */
 
 
+import com.mygdx.pieces.Piece;
+
 public class ChessTable extends ChessBoard {
     private int numPlayers=0;
     public int cMate=0;
@@ -52,8 +54,31 @@ public class ChessTable extends ChessBoard {
         if(!chessLogic.moveAnalisys(this, p, source, dest)) {
             return false;
         }
-
         this.move(source, dest);
+
+        if(chessLogic.pawnPromotion(this, dest)) {
+            this.getSquareByPosition(dest).getPiece().kill();
+            this.getSquareByPosition(dest).setEmpty();
+            System.out.println("Promotion");
+            int choice;
+            choice = this.promoChoice();
+            switch(choice) {
+                case (1):
+                    p.queenProms++;
+                    break;
+                case (2):
+                    p.rookProms++;
+                    break;
+                case(3):
+                    p.knightProms++;
+                break;
+                case(4):
+                    p.bishopProms++;
+                    break;
+            }
+            p.promotedPieces(dest,this,choice);
+        }
+
         p.refresh();
         p.enemy.refresh();
 

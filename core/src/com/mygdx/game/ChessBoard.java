@@ -2,6 +2,8 @@ package com.mygdx.game;
 
 import com.mygdx.pieces.*;
 
+import java.util.Scanner;
+
 /*
 *
 * Esta Classe implementa um tabuleiro de Xadrez com seus métodos.
@@ -67,6 +69,16 @@ public class ChessBoard {
         System.out.println("|                         |");
         System.out.println(" -------------------------");
         System.out.println();
+    }
+
+    public int promoChoice(){
+        int choice;
+        Scanner keyboard = new Scanner(System.in);
+        do {
+            System.out.print("1- Queen\n2- Rook\n3- Knight\n4- Bishop\nChoice: ");
+            choice = keyboard.nextInt();
+        }while(choice != 1 && choice!= 2 && choice != 3 && choice != 4);
+        return choice;
     }
 
     /*Este método imprime o tabuleiro na linha de comando num formato "bonitinho"*/
