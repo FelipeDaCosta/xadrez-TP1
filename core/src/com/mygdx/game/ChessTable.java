@@ -19,6 +19,8 @@ public class ChessTable extends ChessBoard {
     private int numPlayers=0;
     public int cMate=0;
     public int whoseTurn=1;
+    public int promotion=0;
+    public int linhaDeComando = 1;
     private Player player1;
     private Player player2;
     private ChessLogic chessLogic = new ChessLogic();
@@ -61,22 +63,26 @@ public class ChessTable extends ChessBoard {
             this.getSquareByPosition(dest).setEmpty();
             System.out.println("Promotion");
             int choice;
-            choice = this.promoChoice();
-            switch(choice) {
-                case (1):
-                    p.queenProms++;
-                    break;
-                case (2):
-                    p.rookProms++;
-                    break;
-                case(3):
-                    p.knightProms++;
-                break;
-                case(4):
-                    p.bishopProms++;
-                    break;
+            if(linhaDeComando == 1) {
+                choice = this.promoChoice();
+                switch (choice) {
+                    case (1):
+                        p.queenProms++;
+                        break;
+                    case (2):
+                        p.rookProms++;
+                        break;
+                    case (3):
+                        p.knightProms++;
+                        break;
+                    case (4):
+                        p.bishopProms++;
+                        break;
+                }
+                p.promotedPieces(dest, this, choice, this.getSquareByPosition(dest).getPiece());
+            } else {
+               promotion = 1;
             }
-            p.promotedPieces(dest,this,choice);
         }
 
         p.refresh();

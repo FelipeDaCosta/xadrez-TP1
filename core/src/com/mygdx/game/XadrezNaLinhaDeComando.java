@@ -32,6 +32,7 @@ public class XadrezNaLinhaDeComando {
         p2 = chessTable.join();
         boolean firstTurn = true;
         String player1 = "XXX", player2 = "YYY";
+        chessTable.linhaDeComando = 1;
 
 
 
