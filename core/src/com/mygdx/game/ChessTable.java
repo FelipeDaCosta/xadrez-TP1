@@ -20,10 +20,11 @@ public class ChessTable extends ChessBoard {
     public int cMate=0;
     public int whoseTurn=1;
     public int promotion=0;
-    public int linhaDeComando = 1;
-    private Player player1;
-    private Player player2;
-    private ChessLogic chessLogic = new ChessLogic();
+    public int linhaDeComando = 0;
+    public Player player1;
+    public Player player2;
+    public ChessLogic chessLogic = new ChessLogic();
+    public int gphchoice = 10;
 
     public Player join(){
         if(numPlayers==0) {
@@ -50,14 +51,21 @@ public class ChessTable extends ChessBoard {
             return null;
         }
     }
-    public boolean requestMove(Player p, Position source, Position dest){
+    public boolean requestMove(Player p, Position source, Position dest) {
 
         //manda a jogada para análise da classe chessLogic
-        if(!chessLogic.moveAnalisys(this, p, source, dest)) {
+        if (!chessLogic.moveAnalisys(this, p, source, dest)) {
             return false;
         }
         this.move(source, dest);
-
+        if(chessLogic.pawnPromotion(this, dest)) {
+            promotion = 1;
+        }
+        if(linhaDeComando == 1 || promotion == 0)
+            moveIntricacies(p, source, dest);
+        return true;
+    }
+    public boolean moveIntricacies(Player p, Position source, Position dest){
         if(chessLogic.pawnPromotion(this, dest)) {
             this.getSquareByPosition(dest).getPiece().kill();
             this.getSquareByPosition(dest).setEmpty();
@@ -80,11 +88,10 @@ public class ChessTable extends ChessBoard {
                         break;
                 }
                 p.promotedPieces(dest, this, choice, this.getSquareByPosition(dest).getPiece());
-            } else {
-               promotion = 1;
-            }
+            }else
+                p.promotedPieces(dest, this, gphchoice, this.getSquareByPosition(dest).getPiece());
         }
-
+        gphchoice = 10;
         p.refresh();
         p.enemy.refresh();
 
