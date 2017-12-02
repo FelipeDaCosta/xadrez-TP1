@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.ChessBoard;
+import com.mygdx.game.ChessTable;
 import com.mygdx.game.Position;
 import com.mygdx.game.Util;
 import com.mygdx.pieces.Piece;
@@ -100,6 +101,45 @@ public class BoardDrawer extends Drawable {
         if ((i + j) % 2 == 0)
             return new Texture(Gdx.files.internal("black_square.png"));
         return new Texture(Gdx.files.internal("white_square.png"));
+    }
+
+    public int promotion(ChessTable ct){
+        System.out.println("JJJJJJJJJJ");
+        sb.draw(new Texture(Gdx.files.internal("promNorm.png")), Util.SCREEN_WIDTH / 2 - 235,
+                Util.SCREEN_HEIGHT / 2 - 85, 470, 171);
+        if(Gdx.input.getX() > 72 && Gdx.input.getX() < 150 && Gdx.input.getY() > 305 && Gdx.input.getY() < 385) {
+            sb.draw(new Texture(Gdx.files.internal("promNormQ.png")), Util.SCREEN_WIDTH / 2 - 235,
+                    Util.SCREEN_HEIGHT / 2 - 85, 470, 171);
+            if(Gdx.input.isTouched()) {
+                ct.promotion = 0;
+                return 1;
+            }
+        }
+        if(Gdx.input.getX() > 195 && Gdx.input.getX() < 288 && Gdx.input.getY() > 305 && Gdx.input.getY() < 385) {
+            sb.draw(new Texture(Gdx.files.internal("promNormR.png")), Util.SCREEN_WIDTH / 2 - 235,
+                    Util.SCREEN_HEIGHT / 2 - 85, 470, 171);
+            if(Gdx.input.isTouched()) {
+                ct.promotion = 0;
+                return 2;
+            }
+        }
+        if(Gdx.input.getX() > 325 && Gdx.input.getX() < 408 && Gdx.input.getY() > 325 && Gdx.input.getY() < 385) {
+            sb.draw(new Texture(Gdx.files.internal("promNormB.png")), Util.SCREEN_WIDTH / 2 - 235,
+                    Util.SCREEN_HEIGHT / 2 - 85, 470, 171);
+            if(Gdx.input.isTouched()) {
+                ct.promotion = 0;
+                return 4;
+            }
+        }
+        if(Gdx.input.getX() > 455 && Gdx.input.getX() < 538 && Gdx.input.getY() > 315 && Gdx.input.getY() < 385) {
+            sb.draw(new Texture(Gdx.files.internal("promNormK.png")), Util.SCREEN_WIDTH / 2 - 235,
+                    Util.SCREEN_HEIGHT / 2 - 85, 470, 171);
+            if(Gdx.input.isTouched()) {
+                ct.promotion = 0;
+                return 3;
+            }
+        }
+        return 10;
     }
 
 }

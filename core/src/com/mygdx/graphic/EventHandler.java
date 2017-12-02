@@ -8,6 +8,8 @@ import com.mygdx.game.*;
 import com.mygdx.pieces.Piece;
 import com.mygdx.web.Web;
 
+import static com.mygdx.pieces.PieceCode.PAW;
+
 public class EventHandler {
 
     ChessTable ct;
@@ -15,6 +17,14 @@ public class EventHandler {
     BoardDrawer db;
     PositionList posList=null;
     Piece selected=null;
+<<<<<<< HEAD
+=======
+    Player pl;
+    Position pos;
+    Position pd;
+    Player p;
+    int k;
+>>>>>>> 85db6f5db11354d09f7d6c6cb9a1b0d39b045095
 
     public EventHandler(ChessTable ct, BoardDrawer db)
     {
@@ -36,22 +46,47 @@ public class EventHandler {
     }
 
     private void selectionHandler(int i, int j){
+
         if(selected == null) {
+<<<<<<< HEAD
             if (ct.getSquare(i, j).hasPiece()){
                 if(ct.getSquare(i,j).getPiece().getPlayer() == ct.Me) {
+=======
+            if (ct.getSquare(i, j).hasPiece()) {
+                //comentado para que o usuario jogue pelos 2
+                //if(ct.getSquare(i,j).getPiece().getPlayer() == pl) {
+                if (ct.getSquare(i, j).getPiece().getPlayer().getNumber() == ct.getWhoseTurn()) {
+>>>>>>> 85db6f5db11354d09f7d6c6cb9a1b0d39b045095
                     selected = ct.getSquare(i, j).getPiece();
                     posList = selected.canGo(ct);
                     return;
                 }
+<<<<<<< HEAD
             }else{
                 return;
             }
         }else if(ct.requestMove(ct.Me, selected.getPosition(), new Position( i, j))){
+=======
+                //}
+            } else {
+                return;
+            }
+        }else{
+            //if(ct.chessLogic.pawnPromotion(ct, selected.getPosition())) {
+            //    ct.gphchoice = promote();
+            //}
+            if (ct.requestMove(selected.getPlayer(), selected.getPosition(), new Position(i, j))) {
+                if(ct.promotion == 1) {
+                    pos = selected.getPosition();
+                    pd = new Position(i, j);
+                    p = selected.getPlayer();
+                }
+>>>>>>> 85db6f5db11354d09f7d6c6cb9a1b0d39b045095
                 selected = null;
                 posList = null;
                 return;
+            }
         }
-
         selected = null;
         posList=null;
 
@@ -79,4 +114,11 @@ public class EventHandler {
         }
 
     }
+
+    public void promote(){
+        System.out.println("PJJJJJJJ");
+        ct.moveIntricacies(p, pos, pd);
+        ct.promotion = 0;
+    }
+
 }

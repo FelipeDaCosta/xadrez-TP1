@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.ChessBoard;
 import com.mygdx.game.ChessTable;
 import com.mygdx.game.Util;
@@ -51,7 +52,12 @@ public class GameScreen implements Screen{
         Gdx.graphics.setContinuousRendering(false);
         if(Gdx.graphics.getDeltaTime()>5)
             Gdx.graphics.requestRendering();
+<<<<<<< HEAD
 
+=======
+        if(ct.promotion != 1)
+            eventHandler.listen();
+>>>>>>> 85db6f5db11354d09f7d6c6cb9a1b0d39b045095
 
         camera.update();
         game.sb.setProjectionMatrix(camera.combined);
@@ -64,13 +70,17 @@ public class GameScreen implements Screen{
             game.setScreen(new GameOver(game, ct.whoseTurn));
         }
 
+        if(ct.gphchoice != 10)
+            eventHandler.promote();
+
         game.sb.begin();
 
         /*Imprime as texturas em camadas (ordem importa)*/
         board.drawBoard();
         eventHandler.pathHighLighter();
         board.drawPieces();
-
+        if(ct.promotion == 1)
+            ct.gphchoice = board.promotion(ct);
         game.sb.end();
 
     }

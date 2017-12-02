@@ -16,6 +16,7 @@ package com.mygdx.game;
 import com.mygdx.web.Web;
 
 public class ChessTable extends ChessBoard {
+<<<<<<< HEAD
     public int cMate = 0;
     public boolean myTurn;
     public int whoseTurn = 1;
@@ -24,6 +25,17 @@ public class ChessTable extends ChessBoard {
     public  Player Me;
     public Player Enemy;
     private ChessLogic chessLogic = new ChessLogic();
+=======
+    private int numPlayers=0;
+    public int cMate=0;
+    public int whoseTurn=1;
+    public int promotion=0;
+    public int linhaDeComando = 0;
+    public Player player1;
+    public Player player2;
+    public ChessLogic chessLogic = new ChessLogic();
+    public int gphchoice = 10;
+>>>>>>> 85db6f5db11354d09f7d6c6cb9a1b0d39b045095
 
 
     public ChessTable(int myNumber, String myName, String enemyName) {
@@ -52,8 +64,11 @@ public class ChessTable extends ChessBoard {
 
 
     }
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 85db6f5db11354d09f7d6c6cb9a1b0d39b045095
     public boolean requestMove(Player p, Position source, Position dest) {
 
         //manda a jogada para análise da classe chessLogic
@@ -61,9 +76,21 @@ public class ChessTable extends ChessBoard {
             return false;
         }
         this.move(source, dest);
+<<<<<<< HEAD
         Web.sendMove(p.getNumber(), source, dest);
 
         if (chessLogic.pawnPromotion(this, dest)) {
+=======
+        if(chessLogic.pawnPromotion(this, dest)) {
+            promotion = 1;
+        }
+        if(linhaDeComando == 1 || promotion == 0)
+            moveIntricacies(p, source, dest);
+        return true;
+    }
+    public boolean moveIntricacies(Player p, Position source, Position dest){
+        if(chessLogic.pawnPromotion(this, dest)) {
+>>>>>>> 85db6f5db11354d09f7d6c6cb9a1b0d39b045095
             this.getSquareByPosition(dest).getPiece().kill();
             this.getSquareByPosition(dest).setEmpty();
             System.out.println("Promotion");
@@ -85,11 +112,16 @@ public class ChessTable extends ChessBoard {
                         break;
                 }
                 p.promotedPieces(dest, this, choice, this.getSquareByPosition(dest).getPiece());
+<<<<<<< HEAD
             } else {
                 promotion = 1;
             }
+=======
+            }else
+                p.promotedPieces(dest, this, gphchoice, this.getSquareByPosition(dest).getPiece());
+>>>>>>> 85db6f5db11354d09f7d6c6cb9a1b0d39b045095
         }
-
+        gphchoice = 10;
         p.refresh();
         p.enemy.refresh();
 
