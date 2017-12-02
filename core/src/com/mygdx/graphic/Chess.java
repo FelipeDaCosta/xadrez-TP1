@@ -12,17 +12,7 @@ public class Chess extends Game {
 	@Override
 	public void create() {
         sb = new SpriteBatch();
-
-        /*// Dinâmica de criação de um jogo. PARA TESTES
-        Player p1;
-        Player p2;
-        ChessTable ct = new ChessTable();
-        p1 = ct.join();
-        p2 = ct.join();
-
-        BoardDrawer db = new BoardDrawer(ct,sb);
-        EventHandler eventHandler = new EventHandler(ct, db, p1);8*/
-        this.setScreen(new MainMenuScreen(this));//GameScreen(this, eventHandler, ct));
+        this.setScreen(new MainMenuScreen(this));
 	}
 
     public void render() {
@@ -30,6 +20,7 @@ public class Chess extends Game {
     }
 
     public void dispose() {
-        sb.dispose();
+        Web.finishGame();
+	    sb.dispose();
     }
 }

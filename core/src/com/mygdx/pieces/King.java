@@ -22,8 +22,6 @@ public class King extends Piece {
         super.numPlayer = p.getNumber();
     }
 
-    public void moved() { this.hasMoved = true; }
-
     public PositionList canGo(ChessBoard cb) {
 
         PositionList list = new PositionList();

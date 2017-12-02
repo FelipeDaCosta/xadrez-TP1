@@ -71,11 +71,11 @@ public class PlayOnlineMenuScreen implements Screen {
         if (username != "DASAAS") {
             this.dispose();
             //Dinâmica de criação de um jogo. PARA TESTES
-            ChessTable ct = new ChessTable(1, "alex", "jorge");
+            ChessTable ct = new ChessTable(1, "alex", "jorge", true);
 
             BoardDrawer db = new BoardDrawer(ct, game.sb);
             EventHandler eventHandler = new EventHandler(ct, db);
-            game.setScreen(new GameScreen(game, eventHandler, ct, username));
+            game.setScreen(new GameScreen(game, eventHandler, ct, username, true));
         }
         if(Gdx.input.getX() > 154 && Gdx.input.getX() < 446 && Gdx.input.getY() > 350 && Gdx.input.getY() < 417) {
             game.sb.draw(backGameActive, Util.SCREEN_WIDTH / 2 - 146, 183, 292, 67);

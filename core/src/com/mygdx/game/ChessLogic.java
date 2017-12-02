@@ -97,13 +97,12 @@ public class ChessLogic {
         if(isKingInDanger(cb, pl)){
             pieces = pl.getPieces();
 
-
             for(int i=0; i<pieces.size(); i++){
                 piece = pieces.get(i);
                 positions = piece.canGo(cb);
                 for(int j=0; j<positions.size(); j++){
                     position = positions.get(j);
-                    if(willKingSurviveMove(cb, pl, piece.getPosition(), position)){
+                    if(!willKingSurviveMove(cb, pl, piece.getPosition(), position)){
                         pieces = null;
                         positions = null;
                         return false;

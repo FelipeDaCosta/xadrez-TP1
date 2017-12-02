@@ -67,13 +67,13 @@ public abstract class Piece{
         return this.onTheGame;
     }
 
-    public void promotePawn(/*Piece p,*/ int choice/*,ChessBoard cb*/){
+    public void promotePawn(/*Piece p,*/ int choice,ChessBoard cb){
         Piece p = this;
-        //cb.getSquareByPosition(dest).getPiece().kill();
-        //cb.getSquareByPosition(dest).setEmpty();
         Player owner = p.getPlayer();
         Position pos = p.getPosition();
-
+        cb.getSquareByPosition(pos).getPiece().kill();
+        cb.getSquareByPosition(pos).setEmpty();
+        
         if(p.getPieceCode()!=PieceCode.PAW || choice > 4 || choice <1) return;
 
         p.kill();
@@ -93,7 +93,7 @@ public abstract class Piece{
                 break;
         }
         owner.getPieces().add(p);
-        //cb.getSquareByPosition(pos).putPiece(piece);
+        cb.getSquareByPosition(pos).putPiece(p);
     }
 
     public PositionList canGo(ChessBoard cb){

@@ -42,11 +42,11 @@ public class WaitingPlayerScreen implements Screen {
             if(Web.gotGame().equals("yes")) {
                 this.dispose();
                 /* Dinâmica de criação de um jogo. PARA TESTES */
-                ChessTable ct = new ChessTable(1, "alex", "jorge");
+                ChessTable ct = new ChessTable(1, "alex", "jorge", true);
 
                 BoardDrawer db = new BoardDrawer(ct,game.sb);
                 EventHandler eventHandler = new EventHandler(ct, db);
-                game.setScreen(new GameScreen(game, eventHandler, ct, ""));
+                game.setScreen(new GameScreen(game, eventHandler, ct, "", true));
             }
         }
 

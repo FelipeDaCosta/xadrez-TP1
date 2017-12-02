@@ -27,7 +27,7 @@ public class XadrezNaLinhaDeComando {
 
         Player p1;
         Player p2;
-        ChessTable chessTable = new ChessTable(1, "alex", "jorge");
+        ChessTable chessTable = new ChessTable(1, "alex", "jorge", false);
         p1 = chessTable.Me;
         p2 = chessTable.Enemy;
         boolean firstTurn = true;

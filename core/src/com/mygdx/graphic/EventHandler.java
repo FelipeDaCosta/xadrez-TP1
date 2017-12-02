@@ -17,6 +17,8 @@ public class EventHandler {
     BoardDrawer db;
     PositionList posList=null;
     Piece selected=null;
+    boolean onLine;
+
 
     Player pl;
     Position pos;
@@ -34,8 +36,6 @@ public class EventHandler {
 
     public void listen() {
 
-        if(!ct.Me.getTurn()) return;
-
         if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
             int i = Gdx.input.getX()/ Util.SQUARE_WIDTH;
             int j = (Util.SCREEN_HEIGHT - Gdx.input.getY())/ Util.SQUARE_HEIGHT;
@@ -46,14 +46,11 @@ public class EventHandler {
     private void selectionHandler(int i, int j){
         if(selected == null) {
             if (ct.getSquare(i, j).hasPiece()){
-                //comentado para que o usuario jogue pelos 2
-                //if(ct.getSquare(i,j).getPiece().getPlayer() == pl) {
-                if(ct.getSquare(i,j).getPiece().getPlayer()==ct.Me) {
+                if(ct.getSquare(i,j).getPiece().getPlayer()==ct.whoseTurn) {
                     selected = ct.getSquare(i, j).getPiece();
                     posList = selected.canGo(ct);
                     return;
                 }
-                //}
             }else{
                 return;
             }
@@ -67,13 +64,11 @@ public class EventHandler {
         posList=null;
 
         if(ct.getSquare(i,j).hasPiece()){
-            // comentado pra que o usuario jogue pelos 2
-            //if(ct.getSquare(i,j).getPiece().getPlayer() == pl){
-            if(ct.getSquare(i,j).getPiece().getPlayer()==ct.Me) {
+            if(ct.getSquare(i,j).getPiece().getPlayer()==ct.whoseTurn) {
                 selected = ct.getSquare(i, j).getPiece();
                 posList = selected.canGo(ct);
             }
-            //}
+
         }
     }
 

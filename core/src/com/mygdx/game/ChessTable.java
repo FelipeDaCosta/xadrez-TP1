@@ -18,6 +18,8 @@ import com.mygdx.web.Web;
 
 public class ChessTable extends ChessBoard {
     public boolean EndOfTheGame = false;
+    public boolean onLine;
+    public Player whoseTurn;
     public Player winner;
     public boolean needPromotion = false;
     public Piece pawnToPromote;
@@ -26,18 +28,21 @@ public class ChessTable extends ChessBoard {
     public int myNumber;
     public ChessLogic chessLogic = new ChessLogic();
 
-    public ChessTable(int myNumber, String myName, String enemyName) {
+    public ChessTable(int myNumber, String myName, String enemyName, boolean onLine) {
+        this.onLine = onLine;
         this.myNumber = myNumber;
         if (myNumber == 1) {
             Me = new Player(true, false);
             Enemy = new Player(false, true);
             Me.setTurn(true);
             Enemy.setTurn(false);
+            whoseTurn = Me;
         }else if (myNumber == 2) {
             Me = new Player(false, false);
             Enemy = new Player(true, true);
             Me.setTurn(false);
             Enemy.setTurn(true);
+            whoseTurn=Enemy;
         }
 
         Me.setName(myName);
@@ -60,7 +65,7 @@ public class ChessTable extends ChessBoard {
         }
         this.move(source, dest);
 
-        if( me ) Web.sendMove(myNumber, source, dest);
+        if( me && onLine ) Web.sendMove(myNumber, source, dest);
 
         if (chessLogic.isPawnPromotion(this.getSquareByPosition(dest).getPiece())) {
             pawnToPromote = this.getSquareByPosition(dest).getPiece();
@@ -97,13 +102,15 @@ public class ChessTable extends ChessBoard {
     }
 
     public void procceedPromotion(int choice) {
-        pawnToPromote.promotePawn(choice);
+        pawnToPromote.promotePawn(choice, this);
         needPromotion = false;
         afterMoveAdjustements(pawnToPromote.getPlayer());
     }
 
 
     public void changeTurn() {
+        if(whoseTurn==Me)whoseTurn=Enemy;
+        else if(whoseTurn==Enemy)whoseTurn=Me;
         Me.setTurn(!Me.getTurn());
         Enemy.setTurn(!Enemy.getTurn());
     }

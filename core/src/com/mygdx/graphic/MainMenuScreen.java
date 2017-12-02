@@ -50,12 +50,10 @@ public class MainMenuScreen implements Screen {
             game.sb.draw(startGameActive, Util.SCREEN_WIDTH / 2 - 146, 300, 292, 67);
             if(Gdx.input.isTouched()) {
                 this.dispose();
-                /* Dinâmica de criação de um jogo. PARA TESTES */
-                ChessTable ct = new ChessTable(2, "alex", "jorge");
-
+                ChessTable ct = new ChessTable(2, "Player 1", "Player 2", false);
                 BoardDrawer db = new BoardDrawer(ct,game.sb);
                 EventHandler eventHandler = new EventHandler(ct, db);
-                game.setScreen(new GameScreen(game, eventHandler, ct, ""));
+                game.setScreen(new GameScreen(game, eventHandler, ct, "", false));
             }
         }else
             game.sb.draw(startGameInactive, Util.SCREEN_WIDTH/2 - 146, 300, 292, 67);
@@ -70,11 +68,11 @@ public class MainMenuScreen implements Screen {
                 if(resp.equals("ok/2")) {
                     this.dispose();
                     /* Dinâmica de criação de um jogo. PARA TESTES */
-                    ChessTable ct = new ChessTable(2, "alex", "jorge");
+                    ChessTable ct = new ChessTable(2, "alex", "jorge", true);
 
                     BoardDrawer db = new BoardDrawer(ct,game.sb);
                     EventHandler eventHandler = new EventHandler(ct, db);
-                    game.setScreen(new GameScreen(game, eventHandler, ct, ""));
+                    game.setScreen(new GameScreen(game, eventHandler, ct, "", true));
                 }
             }
         }else

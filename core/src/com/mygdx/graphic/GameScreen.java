@@ -17,6 +17,7 @@ import com.mygdx.web.Web;
  */
 public class GameScreen implements Screen{
 
+    boolean onLine;
     Chess game;
     ChessTable ct;
     EventHandler eventHandler;
@@ -26,7 +27,8 @@ public class GameScreen implements Screen{
     int count=0;
 
 
-    public GameScreen(Chess game, EventHandler eventHandler, ChessTable ct, String name) {
+    public GameScreen(Chess game, EventHandler eventHandler, ChessTable ct, String name, boolean onLine) {
+        this.onLine = onLine;
         this.game = game;
         this.ct = ct;
         this.eventHandler=eventHandler;
@@ -57,7 +59,7 @@ public class GameScreen implements Screen{
         game.sb.setProjectionMatrix(camera.combined);
 
 
-        if(ct.Me.getTurn())eventHandler.listen();
+        if(ct.Me.getTurn() || !onLine )eventHandler.listen();
         else ct.verifyEnemyMove();
         if(ct.needPromotion) ct.procceedPromotion(1);
         if(ct.EndOfTheGame) game.setScreen(new GameOver(game, ct.winner));
@@ -94,7 +96,6 @@ public class GameScreen implements Screen{
 
     @Override
     public void dispose() {
-        Web.finishGame();
         board.dispose();
         game.dispose();
     }
