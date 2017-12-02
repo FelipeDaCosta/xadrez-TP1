@@ -27,9 +27,9 @@ public class XadrezNaLinhaDeComando {
 
         Player p1;
         Player p2;
-        ChessTable chessTable = new ChessTable();
-        p1 = chessTable.join();
-        p2 = chessTable.join();
+        ChessTable chessTable = new ChessTable(1, "alex", "jorge");
+        p1 = chessTable.Me;
+        p2 = chessTable.Enemy;
         boolean firstTurn = true;
         String player1 = "XXX", player2 = "YYY";
         chessTable.linhaDeComando = 1;

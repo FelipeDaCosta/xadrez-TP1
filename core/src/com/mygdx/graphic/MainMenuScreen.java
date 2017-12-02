@@ -51,14 +51,10 @@ public class MainMenuScreen implements Screen {
             if(Gdx.input.isTouched()) {
                 this.dispose();
                 /* Dinâmica de criação de um jogo. PARA TESTES */
-                Player p1;
-                Player p2;
-                ChessTable ct = new ChessTable();
-                p1 = ct.join();
-                p2 = ct.join();
+                ChessTable ct = new ChessTable(2, "alex", "jorge");
 
                 BoardDrawer db = new BoardDrawer(ct,game.sb);
-                EventHandler eventHandler = new EventHandler(ct, db, p1);
+                EventHandler eventHandler = new EventHandler(ct, db);
                 game.setScreen(new GameScreen(game, eventHandler, ct, ""));
             }
         }else
@@ -68,8 +64,18 @@ public class MainMenuScreen implements Screen {
             if(Gdx.input.isTouched()) {
                 this.dispose();
                // game.setScreen(new PlayOnlineMenuScreen(game));
-                Web.findGame();
-                game.setScreen(new WaitingPlayerScreen(game));
+                String resp = Web.findGame();
+                if(resp.equals("ok/1"))
+                    game.setScreen(new WaitingPlayerScreen(game));
+                if(resp.equals("ok/2")) {
+                    this.dispose();
+                    /* Dinâmica de criação de um jogo. PARA TESTES */
+                    ChessTable ct = new ChessTable(2, "alex", "jorge");
+
+                    BoardDrawer db = new BoardDrawer(ct,game.sb);
+                    EventHandler eventHandler = new EventHandler(ct, db);
+                    game.setScreen(new GameScreen(game, eventHandler, ct, ""));
+                }
             }
         }else
             game.sb.draw(startOnlineGameInactive, Util.SCREEN_WIDTH/2 - 146, 183, 292, 67);
@@ -106,6 +112,5 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void dispose() {
-
     }
 }

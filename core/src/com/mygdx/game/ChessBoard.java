@@ -117,4 +117,10 @@ public class ChessBoard {
     public Square[][] getBoard() {
         return board;
     }
+
+    public void placePieces(PieceList list){
+        for(int i = 0; i < list.size(); i++){
+            getSquareByPosition(list.get(i).getPosition()).putPiece(list.get(i));
+        }
+    }
 }

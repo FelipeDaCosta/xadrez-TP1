@@ -1,5 +1,7 @@
 package com.mygdx.web;
 
+import com.mygdx.game.Position;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -72,6 +74,15 @@ public class Web {
      *
      * @return <lastMove>
      */
+
+    public static void sendMove(int pl, Position source, Position dest){
+        String move = ""+pl + source.getCharX()+source.getCharY()+dest.getCharX()+dest.getCharY();
+        Web.move(move);
+
+    }
+
+
+
     public static String getMove()  {
         return getMethod("getMove");
     }

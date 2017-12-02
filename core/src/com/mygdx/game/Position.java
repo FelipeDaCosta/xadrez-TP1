@@ -54,7 +54,8 @@ public class Position {
         this.invert();
         return this;
     }
-    private void invert(){
+    public void invert(){
+        X = 7 - X;
         Y = 7 - Y;
     }
 
@@ -64,6 +65,14 @@ public class Position {
     public int getY(){
         return Y;
     }
+
+    public char getCharX(){
+        return (char)(X+65);
+    }
+    public int getCharY(){
+        return (Y+1);
+    }
+
 
     public void moveUp(){
         this.Y = this.Y+1;

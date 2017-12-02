@@ -9,6 +9,7 @@ import com.mygdx.game.ChessTable;
 import com.mygdx.game.Util;
 import com.mygdx.pieces.King;
 import com.mygdx.pieces.Pawn;
+import com.mygdx.web.Web;
 
 /**
  * Created by felipecosta on 10/2/17.
@@ -21,6 +22,8 @@ public class GameScreen implements Screen{
     BoardDrawer board;
     OrthographicCamera camera;
     public String username;
+    int count=0;
+
 
     public GameScreen(Chess game, EventHandler eventHandler, ChessTable ct, String name) {
         this.game = game;
@@ -49,11 +52,13 @@ public class GameScreen implements Screen{
         if(Gdx.graphics.getDeltaTime()>5)
             Gdx.graphics.requestRendering();
 
-        eventHandler.listen();
-
 
         camera.update();
         game.sb.setProjectionMatrix(camera.combined);
+
+        ct.verifyEnemyMove();
+        eventHandler.listen();
+
 
         if(ct.cMate==1){
             game.setScreen(new GameOver(game, ct.whoseTurn));
@@ -92,6 +97,7 @@ public class GameScreen implements Screen{
 
     @Override
     public void dispose() {
+        Web.finishGame();
         board.dispose();
         game.dispose();
     }

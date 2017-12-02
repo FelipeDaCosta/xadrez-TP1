@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.ChessTable;
 import com.mygdx.game.Player;
+import com.mygdx.web.Web;
 
 public class Chess extends Game {
 	public SpriteBatch sb;

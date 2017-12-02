@@ -25,4 +25,9 @@ public class PieceList extends ArrayList<Piece> {
         }
         System.out.println();
     }
+
+    public void invertAll(){
+        for(int i=0 ;i<this.size();i++)
+            this.get(i).getPosition().invert();
+    }
 }

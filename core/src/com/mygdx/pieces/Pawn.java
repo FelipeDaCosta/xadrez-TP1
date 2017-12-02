@@ -27,7 +27,7 @@ public class Pawn extends Piece {
         PositionList list = new PositionList();
         Position p = new Position(this.getPosition());
 
-        if(numPlayer==1) {
+        if(!player.isEnemy) {
             p.moveUp();
             if (p.isValidPosition()) {
                 if (cb.getSquareByPosition(p).isEmpty()) {
@@ -62,7 +62,7 @@ public class Pawn extends Piece {
             }
 
         }
-        if(numPlayer==2) {
+        if(player.isEnemy) {
             p.moveDown();
             if (p.isValidPosition()) {
                 if (cb.getSquareByPosition(p).isEmpty()) {

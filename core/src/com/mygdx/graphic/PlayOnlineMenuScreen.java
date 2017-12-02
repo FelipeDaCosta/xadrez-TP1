@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.game.ChessTable;
 import com.mygdx.game.Player;
 import com.mygdx.game.Util;
+import com.mygdx.web.Web;
 
 /**
  * Created by Iago on 10/27/2017.
@@ -70,14 +71,10 @@ public class PlayOnlineMenuScreen implements Screen {
         if (username != "DASAAS") {
             this.dispose();
             //Dinâmica de criação de um jogo. PARA TESTES
-            Player p1;
-            Player p2;
-            ChessTable ct = new ChessTable();
-            p1 = ct.join();
-            p2 = ct.join();
+            ChessTable ct = new ChessTable(1, "alex", "jorge");
 
             BoardDrawer db = new BoardDrawer(ct, game.sb);
-            EventHandler eventHandler = new EventHandler(ct, db, p1);
+            EventHandler eventHandler = new EventHandler(ct, db);
             game.setScreen(new GameScreen(game, eventHandler, ct, username));
         }
         if(Gdx.input.getX() > 154 && Gdx.input.getX() < 446 && Gdx.input.getY() > 350 && Gdx.input.getY() < 417) {
@@ -115,6 +112,5 @@ public class PlayOnlineMenuScreen implements Screen {
 
     @Override
     public void dispose() {
-
     }
 }

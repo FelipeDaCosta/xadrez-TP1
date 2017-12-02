@@ -24,6 +24,10 @@ public abstract class Piece{
         this.pieceCode = pieceCode;
         position = new Position(X,Y);
     }
+    public Piece(PieceCode pieceCode, Position pos) {
+        this.pieceCode = pieceCode;
+        position = new Position(pos.getX(), pos.getY());
+    }
     public void setPosition(char X, int Y){
         position.setPosition(X,Y);
     }

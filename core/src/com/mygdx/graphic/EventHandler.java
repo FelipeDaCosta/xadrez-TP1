@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.*;
 import com.mygdx.pieces.Piece;
+import com.mygdx.web.Web;
 
 public class EventHandler {
 
@@ -14,18 +15,19 @@ public class EventHandler {
     BoardDrawer db;
     PositionList posList=null;
     Piece selected=null;
-    Player pl;
-    int k;
 
-    public EventHandler(ChessTable ct, BoardDrawer db, Player pl)
+    public EventHandler(ChessTable ct, BoardDrawer db)
     {
-        this.pl = pl;
         this.ct = ct;
         this.db = db;
     }
 
 
+
     public void listen() {
+
+        if(!ct.getMyTurn()) return;
+
         if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
             int i = Gdx.input.getX()/ Util.SQUARE_WIDTH;
             int j = (Util.SCREEN_HEIGHT - Gdx.input.getY())/ Util.SQUARE_HEIGHT;
@@ -36,18 +38,15 @@ public class EventHandler {
     private void selectionHandler(int i, int j){
         if(selected == null) {
             if (ct.getSquare(i, j).hasPiece()){
-                //comentado para que o usuario jogue pelos 2
-                //if(ct.getSquare(i,j).getPiece().getPlayer() == pl) {
-                    if(ct.getSquare(i,j).getPiece().getPlayer().getNumber()==ct.getWhoseTurn()) {
-                        selected = ct.getSquare(i, j).getPiece();
-                        posList = selected.canGo(ct);
-                        return;
-                    }
-                //}
+                if(ct.getSquare(i,j).getPiece().getPlayer() == ct.Me) {
+                    selected = ct.getSquare(i, j).getPiece();
+                    posList = selected.canGo(ct);
+                    return;
+                }
             }else{
                 return;
             }
-        }else if(ct.requestMove(selected.getPlayer(), selected.getPosition(), new Position(i,j))){
+        }else if(ct.requestMove(ct.Me, selected.getPosition(), new Position( i, j))){
                 selected = null;
                 posList = null;
                 return;
@@ -57,13 +56,10 @@ public class EventHandler {
         posList=null;
 
         if(ct.getSquare(i,j).hasPiece()){
-            // comentado pra que o usuario jogue pelos 2
-            //if(ct.getSquare(i,j).getPiece().getPlayer() == pl){
-                if(ct.getSquare(i,j).getPiece().getPlayer().getNumber()==ct.getWhoseTurn()) {
-                    selected = ct.getSquare(i, j).getPiece();
-                    posList = selected.canGo(ct);
-                }
-            //}
+            if(ct.getSquare(i,j).getPiece().getPlayer()==ct.Me) {
+                selected = ct.getSquare(i, j).getPiece();
+                posList = selected.canGo(ct);
+            }
         }
     }
 

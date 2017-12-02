@@ -13,57 +13,62 @@ package com.mygdx.game;
 * */
 
 
-import com.mygdx.pieces.Piece;
+import com.mygdx.web.Web;
 
 public class ChessTable extends ChessBoard {
-    private int numPlayers=0;
-    public int cMate=0;
-    public int whoseTurn=1;
-    public int promotion=0;
+    public int cMate = 0;
+    public boolean myTurn;
+    public int whoseTurn = 1;
+    public int promotion = 0;
     public int linhaDeComando = 1;
-    private Player player1;
-    private Player player2;
+    public  Player Me;
+    public Player Enemy;
     private ChessLogic chessLogic = new ChessLogic();
 
-    public Player join(){
-        if(numPlayers==0) {
-            player1 = new Player(1);
-            for(int i=0; i < player1.getPieces().size(); i++){
-                super.getSquareByPosition(player1.getPieces().get(i).getPosition()).putPiece(player1.getPieces().get(i));
-            }
-            player1.setTurn(true);
-            numPlayers++;
-            return player1;
+
+    public ChessTable(int myNumber, String myName, String enemyName) {
+        if (myNumber == 1) {
+            myTurn = true;
+            Me = new Player(1, false);
+            Enemy = new Player(2, true);
+            Me.setTurn(true);
+            Enemy.setTurn(false);
+        } else if (myNumber == 2) {
+            myTurn = false;
+            Me = new Player(2, false);
+            Enemy = new Player(1, true);
+            Me.setTurn(false);
+            Enemy.setTurn(true);
         }
-        if(numPlayers==1){
-            player2 = new Player(2);
-            for(int i=0; i < player2.getPieces().size(); i++){
-                super.getSquareByPosition(player2.getPieces().get(i).getPosition().toInverted()).putPiece(player2.getPieces().get(i));
-            }
-            player2.setTurn(false);
-            player1.setEnemy(player2);
-            player2.setEnemy(player1);
-            numPlayers++;
-            return player2;
-        }else{
-            System.out.println("Mesa ocupada");
-            return null;
-        }
+
+        Me.setName(myName);
+        Enemy.setName(enemyName);
+
+        Me.setEnemy(Enemy);
+        Enemy.setEnemy(Me);
+
+        super.placePieces(Me.getPieces());
+        super.placePieces(Enemy.getPieces());
+
+
     }
-    public boolean requestMove(Player p, Position source, Position dest){
+
+
+    public boolean requestMove(Player p, Position source, Position dest) {
 
         //manda a jogada para análise da classe chessLogic
-        if(!chessLogic.moveAnalisys(this, p, source, dest)) {
+        if (!chessLogic.moveAnalisys(this, p, source, dest)) {
             return false;
         }
         this.move(source, dest);
+        Web.sendMove(p.getNumber(), source, dest);
 
-        if(chessLogic.pawnPromotion(this, dest)) {
+        if (chessLogic.pawnPromotion(this, dest)) {
             this.getSquareByPosition(dest).getPiece().kill();
             this.getSquareByPosition(dest).setEmpty();
             System.out.println("Promotion");
             int choice;
-            if(linhaDeComando == 1) {
+            if (linhaDeComando == 1) {
                 choice = this.promoChoice();
                 switch (choice) {
                     case (1):
@@ -81,38 +86,89 @@ public class ChessTable extends ChessBoard {
                 }
                 p.promotedPieces(dest, this, choice, this.getSquareByPosition(dest).getPiece());
             } else {
-               promotion = 1;
+                promotion = 1;
             }
         }
 
         p.refresh();
         p.enemy.refresh();
 
-        if(chessLogic.isUnderCheckMate(this,  p.enemy)){
-            System.out.println("Check Mate! "+p.getName()+" venceu!");
-            player1.setTurn(false);
-            player2.setTurn(false);
-            cMate=1;
+        if (chessLogic.isUnderCheckMate(this, p.enemy)) {
+            System.out.println("Check Mate! " + p.getName() + " venceu!");
+            Me.setTurn(false);
+            Enemy.setTurn(false);
+            cMate = 1;
             //Aqui faz alguma coisa pra acabar o jogo.
         }
 
         changeTurn();
-        if(chessLogic.isKingInDanger(this, p.enemy)){
+        if (chessLogic.isKingInDanger(this, p.enemy)) {
             p.enemy.setUnderCheck(true);
-            System.out.println(p.enemy.getName()+" está em Cheque!");
-        }else{
+            System.out.println(p.enemy.getName() + " está em Cheque!");
+        } else {
             p.enemy.setUnderCheck(false);
         }
         return true;
     }
-    public void changeTurn(){
-        if(whoseTurn==1) whoseTurn = 2;
-        else whoseTurn=1;
-        player1.setTurn(!player1.getTurn());
-        player2.setTurn(!player2.getTurn());
+
+    public void changeTurn() {
+        myTurn=!myTurn;
+        Me.setTurn(!Me.getTurn());
+        Enemy.setTurn(!Enemy.getTurn());
+        if (whoseTurn == 1) whoseTurn = 2;
+        if (whoseTurn == 2) whoseTurn = 1;
     }
-    public int getWhoseTurn(){
+
+    public boolean getMyTurn() {
+        return myTurn;
+    }
+
+    public int getWhoseTurn() {
         return whoseTurn;
     }
-    
+
+    public boolean verifyEnemyMove(){
+
+        if(myTurn) return false;
+
+        int pl;
+
+        String lastMove = Web.getMove();
+        pl = (int) lastMove.charAt(0)-48;
+        System.out.println("move: "+ lastMove + " " );
+        if(pl==Enemy.getNumber()){
+            Position source =  new Position((int)lastMove.charAt(1)-65,(int)lastMove.charAt(2)-49);
+            Position dest = new Position((int)lastMove.charAt(3)-65,(int)lastMove.charAt(4)-49);
+            source.invert();
+            dest.invert();
+
+            move(source, dest);
+
+            // Falta implementar a promocao do inimigo
+
+
+            Me.refresh();
+            Enemy.refresh();
+
+            if (chessLogic.isUnderCheckMate(this, Enemy)) {
+                System.out.println("Check Mate! " + Me.getName() + " venceu!");
+                Me.setTurn(false);
+                Enemy.setTurn(false);
+                cMate = 1;
+                //Aqui faz alguma coisa pra acabar o jogo.
+            }
+
+            changeTurn();
+
+            if (chessLogic.isKingInDanger(this, Enemy)) {
+                Enemy.setUnderCheck(true);
+                System.out.println(Enemy.getName() + " está em Cheque!");
+            } else {
+                Enemy.setUnderCheck(false);
+            }
+            return true;
+        }
+        return false;
+    }
+
 }

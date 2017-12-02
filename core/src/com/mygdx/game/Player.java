@@ -22,14 +22,16 @@ public class Player {
     private int numPlayer;
     private boolean myTurn=false;
     private boolean underCheck=false;
+    public boolean isEnemy = false;
     private  PieceList alivePieces;
-    List<Piece> piecesList = new ArrayList<Piece>();
-    Player enemy;
+    PieceList piecesList = new PieceList();
+    public Player enemy;
 
 
-    public Player(int numPlayer){
+    public Player(int numPlayer, boolean isEnemy){
         this.name = "Player "+numPlayer;
         this.numPlayer = numPlayer;
+        this.isEnemy = isEnemy;
         piecesList.add(new Pawn(this,'A',2));
         piecesList.add(new Pawn(this,'B',2));
         piecesList.add(new Pawn(this,'C',2));
@@ -47,16 +49,21 @@ public class Player {
         piecesList.add(new Bishop(this,'C',1));
         piecesList.add(new Bishop(this,'F',1));
 
-        alivePieces = new PieceList();
 
+        if(numPlayer==1) {
+            piecesList.add(new King(this, 'E', 1));
+            piecesList.add(new Queen(this, 'D', 1));
+        }
         if(numPlayer==2){
-            piecesList.get(8).setPosition('D',1);
-            piecesList.get(9).setPosition('E',1);
+            piecesList.add(new King(this,'D',1));
+            piecesList.add(new Queen(this,'E',1));
         }
 
-        for(int i = 0;i<16;i++){
-            alivePieces.add(piecesList.get(i));
-        }
+        if(isEnemy) piecesList.invertAll();
+
+        alivePieces = new PieceList();
+        alivePieces.addAll(piecesList);
+
     }
 
     public void setTurn(boolean b){
@@ -66,7 +73,7 @@ public class Player {
     public void refresh(){
 
         this.alivePieces.clear();
-        for(int i = 0;i<16;i++){
+        for(int i=0 ;i<piecesList.size();i++){
             if(piecesList.get(i).isOnTheGame()) {
                 alivePieces.add(piecesList.get(i));
             }
@@ -120,6 +127,7 @@ public class Player {
     public PieceList getPieces() {
         return alivePieces;
     }
+
 
     public void setUnderCheck(boolean underCheck) {
         this.underCheck = underCheck;
