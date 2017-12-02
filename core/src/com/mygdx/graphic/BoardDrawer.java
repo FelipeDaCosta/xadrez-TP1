@@ -49,50 +49,50 @@ public class BoardDrawer extends Drawable {
 
     private Texture textureByPiece(Piece piece){
         PieceCode code = piece.getPieceCode();
-        int num = piece.getNumPlayer();
+        boolean white = piece.getPlayer().whitePieces;
         switch(code){
             case BSP:
-                if(num==1){
+                if(white){
                     return new Texture(Gdx.files.internal("bishop_white.png"));
-                }else if(num==2){
+
+                }else{
                     return new Texture(Gdx.files.internal("bishop_black.png"));
                 }
-                break;
             case KNG:
-                if(num==1){
+                if(white){
                     return new Texture(Gdx.files.internal("king_white.png"));
-                }else if(num==2){
+                }else{
                     return new Texture(Gdx.files.internal("king_black.png"));
                 }
-                break;
+
             case KNT:
-                if(num==1){
+                if(white){
                     return new Texture(Gdx.files.internal("knight_white.png"));
-                }else if(num==2){
+                }else{
                     return new Texture(Gdx.files.internal("knight_black.png"));
                 }
-                break;
+
             case PAW:
-                if(num==1){
+                if(white){
                     return new Texture(Gdx.files.internal("pawn_white.png"));
-                }else if(num==2){
+                }else{
                     return new Texture(Gdx.files.internal("pawn_black.png"));
                 }
-                break;
+
             case QEN:
-                if(num==1){
+                if(white){
                     return new Texture(Gdx.files.internal("queen_white.png"));
-                }else if(num==2){
+                }else{
                     return new Texture(Gdx.files.internal("queen_black.png"));
                 }
-                break;
+
             case ROK:
-                if(num==1){
+                if(white){
                     return new Texture(Gdx.files.internal("rook_white.png"));
-                }else if(num==2){
+                }else{
                     return new Texture(Gdx.files.internal("rook_black.png"));
                 }
-                break;
+
         }
         return null;
     }
@@ -101,45 +101,6 @@ public class BoardDrawer extends Drawable {
         if ((i + j) % 2 == 0)
             return new Texture(Gdx.files.internal("black_square.png"));
         return new Texture(Gdx.files.internal("white_square.png"));
-    }
-
-    public int promotion(ChessTable ct){
-        System.out.println("JJJJJJJJJJ");
-        sb.draw(new Texture(Gdx.files.internal("promNorm.png")), Util.SCREEN_WIDTH / 2 - 235,
-                Util.SCREEN_HEIGHT / 2 - 85, 470, 171);
-        if(Gdx.input.getX() > 72 && Gdx.input.getX() < 150 && Gdx.input.getY() > 305 && Gdx.input.getY() < 385) {
-            sb.draw(new Texture(Gdx.files.internal("promNormQ.png")), Util.SCREEN_WIDTH / 2 - 235,
-                    Util.SCREEN_HEIGHT / 2 - 85, 470, 171);
-            if(Gdx.input.isTouched()) {
-                ct.promotion = 0;
-                return 1;
-            }
-        }
-        if(Gdx.input.getX() > 195 && Gdx.input.getX() < 288 && Gdx.input.getY() > 305 && Gdx.input.getY() < 385) {
-            sb.draw(new Texture(Gdx.files.internal("promNormR.png")), Util.SCREEN_WIDTH / 2 - 235,
-                    Util.SCREEN_HEIGHT / 2 - 85, 470, 171);
-            if(Gdx.input.isTouched()) {
-                ct.promotion = 0;
-                return 2;
-            }
-        }
-        if(Gdx.input.getX() > 325 && Gdx.input.getX() < 408 && Gdx.input.getY() > 325 && Gdx.input.getY() < 385) {
-            sb.draw(new Texture(Gdx.files.internal("promNormB.png")), Util.SCREEN_WIDTH / 2 - 235,
-                    Util.SCREEN_HEIGHT / 2 - 85, 470, 171);
-            if(Gdx.input.isTouched()) {
-                ct.promotion = 0;
-                return 4;
-            }
-        }
-        if(Gdx.input.getX() > 455 && Gdx.input.getX() < 538 && Gdx.input.getY() > 315 && Gdx.input.getY() < 385) {
-            sb.draw(new Texture(Gdx.files.internal("promNormK.png")), Util.SCREEN_WIDTH / 2 - 235,
-                    Util.SCREEN_HEIGHT / 2 - 85, 470, 171);
-            if(Gdx.input.isTouched()) {
-                ct.promotion = 0;
-                return 3;
-            }
-        }
-        return 10;
     }
 
 }

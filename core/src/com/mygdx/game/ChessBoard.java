@@ -91,7 +91,7 @@ public class ChessBoard {
                     System.out.print("  X   ");
                 }else{
                         System.out.print(" " + board[i][j].getPiece().getPieceCode()
-                                + board[i][j].getPiece().getNumPlayer()+ " ");
+                                + board[i][j].getPiece().getPlayerNumber()+ " ");
                 }
             }
             System.out.println();

@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.game.ChessTable;
+import com.mygdx.game.Player;
 import com.mygdx.game.Util;
 
 /**
@@ -15,7 +16,7 @@ import com.mygdx.game.Util;
 
 public class GameOver implements Screen {
 
-    private int winner;
+    private Player winner;
     Chess game;
     Texture gameover;
     Texture gameoverw;
@@ -24,9 +25,9 @@ public class GameOver implements Screen {
     Texture exitGameActive;
     Texture exitGameInactive;
 
-    public GameOver (Chess game, int whoseTurn) {
+    public GameOver (Chess game, Player winner) {
         this.game = game;
-        this.winner = whoseTurn;
+        this.winner = winner;
         gameover = new Texture("game_over.jpg");
         gameoverw = new Texture("gameoverw.jpg");
         mmenuActive = new Texture("button_main-menuA.png");
@@ -45,10 +46,14 @@ public class GameOver implements Screen {
         Gdx.gl.glClearColor(0f, 0f, 0f, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.sb.begin();
-        if(winner == 1)
-            game.sb.draw(gameover, 0, 0, 600, 600);
-        else
+        if(winner.whitePieces)
             game.sb.draw(gameoverw, 0, 0, 600, 600);
+        else
+            game.sb.draw(gameover, 0, 0, 600, 600);
+
+        //Escreve a mensagem com pelo menos o nome de quem ganhou
+
+
         if(Gdx.input.getX() > 154 && Gdx.input.getX() < 446 && Gdx.input.getY() > 333 && Gdx.input.getY() < 400) {
             game.sb.draw(mmenuActive, Util.SCREEN_WIDTH / 2 - 146, 200, 292, 67);
             if(Gdx.input.isTouched()) {

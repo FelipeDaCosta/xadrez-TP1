@@ -33,7 +33,7 @@ public abstract class Piece{
     }
 
     public void setPosition(Position p){
-        position = p;
+        this.position = p;
     }
     public Position getPosition(){
         return position;
@@ -50,15 +50,15 @@ public abstract class Piece{
         return this.pieceCode;
     }
 
-    public int getNumPlayer(){
-        return player.getNumber();
+    public int getPlayerNumber(){
+        return this.player.getNumber();
     }
     public Player getPlayer(){
         return this.player;
     }
 
     public boolean isEnemy(Piece p){
-        if(p.getNumPlayer()==this.player.getNumber())
+        if(p.getPlayer()==this.player)
             return false;
         return true;
     }
@@ -67,10 +67,35 @@ public abstract class Piece{
         return this.onTheGame;
     }
 
+    public void promotePawn(/*Piece p,*/ int choice/*,ChessBoard cb*/){
+        Piece p = this;
+        //cb.getSquareByPosition(dest).getPiece().kill();
+        //cb.getSquareByPosition(dest).setEmpty();
+        Player owner = p.getPlayer();
+        Position pos = p.getPosition();
 
-    /*
-    * Não sabia como declarar um método que DEVE ser implementado pelos filhos de outro jeito.. =/
-    * */
+        if(p.getPieceCode()!=PieceCode.PAW || choice > 4 || choice <1) return;
+
+        p.kill();
+
+        switch (choice) {
+            case (1):
+                p = new Queen(owner, (char) (pos.getX() + 65), pos.getY() + 1);
+                break;
+            case (2):
+                p = new Rook(owner, (char) (pos.getX() + 65), pos.getY() + 1);
+                break;
+            case (3):
+                p = new Knight(owner, (char) (pos.getX() + 65), pos.getY() + 1);
+                break;
+            case (4):
+                p = new Bishop(owner, (char) (pos.getX() + 65), pos.getY() + 1);
+                break;
+        }
+        owner.getPieces().add(p);
+        //cb.getSquareByPosition(pos).putPiece(piece);
+    }
+
     public PositionList canGo(ChessBoard cb){
         return null;
     }

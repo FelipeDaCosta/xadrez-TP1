@@ -48,39 +48,26 @@ public class GameScreen implements Screen{
 
         /*Esse trecho de código deixa a renderização mais lenta, pois os cliques do mouse eram interpre
         * tados como multiplos cliques
-        * */
+        *
         Gdx.graphics.setContinuousRendering(false);
         if(Gdx.graphics.getDeltaTime()>5)
             Gdx.graphics.requestRendering();
-<<<<<<< HEAD
-
-=======
-        if(ct.promotion != 1)
-            eventHandler.listen();
->>>>>>> 85db6f5db11354d09f7d6c6cb9a1b0d39b045095
-
+*/
         camera.update();
         game.sb.setProjectionMatrix(camera.combined);
 
-        ct.verifyEnemyMove();
-        eventHandler.listen();
 
+        if(ct.Me.getTurn())eventHandler.listen();
+        else ct.verifyEnemyMove();
+        if(ct.needPromotion) ct.procceedPromotion(1);
+        if(ct.EndOfTheGame) game.setScreen(new GameOver(game, ct.winner));
 
-        if(ct.cMate==1){
-            game.setScreen(new GameOver(game, ct.whoseTurn));
-        }
-
-        if(ct.gphchoice != 10)
-            eventHandler.promote();
 
         game.sb.begin();
-
         /*Imprime as texturas em camadas (ordem importa)*/
         board.drawBoard();
         eventHandler.pathHighLighter();
         board.drawPieces();
-        if(ct.promotion == 1)
-            ct.gphchoice = board.promotion(ct);
         game.sb.end();
 
     }

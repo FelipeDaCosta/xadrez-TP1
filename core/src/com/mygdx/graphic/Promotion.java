@@ -55,7 +55,7 @@ public class Promotion implements Screen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0f, 0f, 0f, 0);
+       /* Gdx.gl.glClearColor(0f, 0f, 0f, 0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         game.sb.begin();
         game.sb.draw(fundo, 0, 0, 600, 600);
@@ -64,11 +64,11 @@ public class Promotion implements Screen {
             game.sb.draw(whiteQ, Util.SCREEN_WIDTH / 2 - 146, 200, 292, 67);
             if(Gdx.input.getX() > 154 && Gdx.input.getX() < 446 && Gdx.input.getY() > 333 && Gdx.input.getY() < 400) {
                 if(Gdx.input.isTouched()) {
-                    //ct.
+                    ct.procceedPromotion(1);
                 }
             }/*else{
-            //game.sb.draw(gameoverw, 0, 0, 600, 600);*/
-        }
+            //game.sb.draw(gameoverw, 0, 0, 600, 600);
+        }*/
         /*if(Gdx.input.getX() > 154 && Gdx.input.getX() < 446 && Gdx.input.getY() > 333 && Gdx.input.getY() < 400) {
             game.sb.draw(mmenuActive, Util.SCREEN_WIDTH / 2 - 146, 200, 292, 67);
             if(Gdx.input.isTouched()) {

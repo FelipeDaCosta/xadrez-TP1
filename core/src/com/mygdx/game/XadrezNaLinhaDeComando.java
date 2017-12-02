@@ -11,7 +11,7 @@ public class XadrezNaLinhaDeComando {
 * */
 
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         /*
         *
         * FUNCIONAMENTO DA PARTIDA:
@@ -32,7 +32,7 @@ public class XadrezNaLinhaDeComando {
         p2 = chessTable.Enemy;
         boolean firstTurn = true;
         String player1 = "XXX", player2 = "YYY";
-        chessTable.linhaDeComando = 1;
+        // chessTable.linhaDeComando = 1;
 
 
 
@@ -46,16 +46,16 @@ public class XadrezNaLinhaDeComando {
 
 
         Scanner keyboard = new Scanner(System.in);
-        while(true) {
+        while (true) {
             System.out.println();
-            if(firstTurn) {
+            if (firstTurn) {
                 chessTable.printMenu();
                 String line;
                 do {
                     System.out.print("Choice: ");
                     line = keyboard.nextLine();
-                }while(line.charAt(0) != '1' && line.charAt(0) != '2');
-                switch(line.charAt(0)) {
+                } while (line.charAt(0) != '1' && line.charAt(0) != '2');
+                switch (line.charAt(0)) {
                     case ('1'):
                         System.out.print("Player 1 name: ");
                         player1 = keyboard.nextLine();
@@ -73,10 +73,10 @@ public class XadrezNaLinhaDeComando {
             System.out.println();
             char Xs;
             char Ys;
-            char Xd ;
+            char Xd;
             char Yd;
-            while(true){
-                if(chessTable.getWhoseTurn() == 1)
+            while (true) {
+                /*if(chessTable.getWhoseTurn() == 1)
                     System.out.println("Jogada do Player "+player1+": ");
                 else
                     System.out.println("Jogada do Player "+player2+": ");
@@ -105,15 +105,15 @@ public class XadrezNaLinhaDeComando {
             System.out.println(Xs + "" + Ys + " -> " + Xd + "" + Yd);
 
             /*Aqui um hackzinho para que você sempre jogue como se fosse o jogador que tem a vez*/
-            if ((chessTable.getWhoseTurn() == 1)){
+           /* if ((chessTable.getWhoseTurn() == 1)){
                 chessTable.requestMove(p1, new Position(Xs, (int) Ys - 48), new Position(Xd, (int) Yd - 48));
             }
             if (chessTable.getWhoseTurn() == 2) {
                 chessTable.requestMove(p2, new Position(Xs, (int) Ys - 48), new Position(Xd, (int) Yd - 48));
             }
+            */
 
+            }
 
         }
-
-    }
-}
+    }}

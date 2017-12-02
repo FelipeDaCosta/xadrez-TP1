@@ -85,7 +85,7 @@ public class ChessLogic {
     }
 
     public boolean isMovingHisOwnPiece(Player p, Piece piece){
-        return (piece.getNumPlayer()==p.getNumber());
+        return (piece.getPlayer()==p);
     }
 
     public boolean isUnderCheckMate(ChessBoard cb, Player pl){
@@ -118,8 +118,7 @@ public class ChessLogic {
         return false;
     }
 
-    public boolean pawnPromotion(ChessBoard cb, Position destination){
-        Piece piece = cb.getSquareByPosition(destination).getPiece();
+    public boolean isPawnPromotion(Piece piece){
         int y = piece.getPosition().getY();
 
         if(piece.getPieceCode() == PAW && (y == 0 || y== 7)){
@@ -130,7 +129,6 @@ public class ChessLogic {
     }
 
     public boolean willKingSurviveMove(ChessBoard cb, Player pl, Position source, Position dest){
-        Piece enemyPiece = null;
         boolean resp = true;
 
         cb.move(source, dest);
