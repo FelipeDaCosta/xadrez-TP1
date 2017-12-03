@@ -4,13 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.mygdx.game.ChessBoard;
 import com.mygdx.game.ChessTable;
 import com.mygdx.game.Util;
-import com.mygdx.pieces.King;
-import com.mygdx.pieces.Pawn;
-import com.mygdx.web.Web;
 
 /**
  * Created by felipecosta on 10/2/17.
@@ -61,23 +56,16 @@ public class GameScreen implements Screen{
         game.sb.setProjectionMatrix(camera.combined);
 
 
-        if(ct.Me.getTurn() || !onLine )eventHandler.listen();
-        else ct.verifyEnemyMove();
-        if(ct.needPromotion && promotion == 1){
-            ct.procceedPromotion(promochoice);
-            promochoice = 0;
-            promotion = 0;
-        }
-        if(ct.EndOfTheGame) game.setScreen(new GameOver(game, ct.winner));
+            if (ct.Me.getTurn() || !onLine) eventHandler.listen();
+            else ct.verifyEnemyMove();
+            if (ct.EndOfTheGame) game.setScreen(new GameOver(game, ct.winner));
 
 
         game.sb.begin();
-        /*Imprime as texturas em camadas (ordem importa)*/
         board.drawBoard();
         eventHandler.pathHighLighter();
         board.drawPieces();
-        if(ct.needPromotion)
-            promochoice = board.promotion(ct,this);
+        if(ct.needPromotion && (ct.Me.getTurn() || !onLine)) board.drawPromotion(ct,this);
         game.sb.end();
 
     }

@@ -36,6 +36,7 @@ public class EventHandler {
 
     public void listen() {
 
+        if(ct.needPromotion) return;
         if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
             int i = Gdx.input.getX()/ Util.SQUARE_WIDTH;
             int j = (Util.SCREEN_HEIGHT - Gdx.input.getY())/ Util.SQUARE_HEIGHT;

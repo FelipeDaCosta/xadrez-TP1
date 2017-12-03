@@ -137,6 +137,10 @@ public class ChessTable extends ChessBoard {
         dest.invert();
 
         requestMove(Enemy, source, dest, false);
+        if(this.needPromotion){
+            // funcão web que recebe a promoção do adversario
+            // chama this.proceedPromotion(choice) com a escolha do usuario
+        }
 
         return true;
 

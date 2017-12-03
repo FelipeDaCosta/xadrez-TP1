@@ -102,41 +102,42 @@ public class BoardDrawer extends Drawable {
             return new Texture(Gdx.files.internal("black_square.png"));
         return new Texture(Gdx.files.internal("white_square.png"));
     }
-    public int promotion(ChessTable ct, GameScreen gs){
+
+    public void drawPromotion(ChessTable ct, GameScreen gs){
         sb.draw(new Texture(Gdx.files.internal("promNorm.png")), Util.SCREEN_WIDTH / 2 - 235,
                 Util.SCREEN_HEIGHT / 2 - 85, 470, 171);
         if(Gdx.input.getX() > 72 && Gdx.input.getX() < 150 && Gdx.input.getY() > 305 && Gdx.input.getY() < 385) {
             sb.draw(new Texture(Gdx.files.internal("promNormQ.png")), Util.SCREEN_WIDTH / 2 - 235,
                     Util.SCREEN_HEIGHT / 2 - 85, 470, 171);
             if(Gdx.input.isTouched()) {
-                gs.promotion = 1;
-                return 1;
+                ct.procceedPromotion(1);
+                return;
             }
         }
         if(Gdx.input.getX() > 195 && Gdx.input.getX() < 288 && Gdx.input.getY() > 305 && Gdx.input.getY() < 385) {
             sb.draw(new Texture(Gdx.files.internal("promNormR.png")), Util.SCREEN_WIDTH / 2 - 235,
                     Util.SCREEN_HEIGHT / 2 - 85, 470, 171);
             if(Gdx.input.isTouched()) {
-                gs.promotion = 1;
-                return 2;
+                ct.procceedPromotion(2);
+                return;
             }
         }
         if(Gdx.input.getX() > 325 && Gdx.input.getX() < 408 && Gdx.input.getY() > 325 && Gdx.input.getY() < 385) {
             sb.draw(new Texture(Gdx.files.internal("promNormB.png")), Util.SCREEN_WIDTH / 2 - 235,
                     Util.SCREEN_HEIGHT / 2 - 85, 470, 171);
             if(Gdx.input.isTouched()) {
-                gs.promotion = 1;
-                return 4;
+                ct.procceedPromotion(4);
+                return;
             }
         }
         if(Gdx.input.getX() > 455 && Gdx.input.getX() < 538 && Gdx.input.getY() > 315 && Gdx.input.getY() < 385) {
             sb.draw(new Texture(Gdx.files.internal("promNormK.png")), Util.SCREEN_WIDTH / 2 - 235,
                     Util.SCREEN_HEIGHT / 2 - 85, 470, 171);
             if(Gdx.input.isTouched()) {
-                gs.promotion = 1;
-                return 3;
+                ct.procceedPromotion(3);
+                return;
             }
         }
-        return 0;
+        return;
     }
 }

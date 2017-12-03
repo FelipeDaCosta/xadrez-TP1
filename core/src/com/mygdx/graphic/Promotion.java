@@ -35,7 +35,7 @@ public class Promotion implements Screen {
         this.game = game;
         this.eventHandler = eventHandler;
         this.ct = ct;
-        fundo = new Texture("promotion.jpg");
+        fundo = new Texture("drawPromotion.jpg");
         whiteQ = new Texture("queen_white.jpg");
         whiteB = new Texture("bishop_white.jpg");
         whiteR = new Texture("rook_white.png");
