@@ -41,7 +41,7 @@ public class WaitingPlayerScreen implements Screen {
             count = 0;
             if(Web.gotGame().equals("yes")) {
                 this.dispose();
-                ChessTable ct = new ChessTable(1, "alex", "jorge", true);
+                ChessTable ct = new ChessTable(1, true);
 
                 BoardDrawer db = new BoardDrawer(ct,game.sb);
                 EventHandler eventHandler = new EventHandler(ct, db);

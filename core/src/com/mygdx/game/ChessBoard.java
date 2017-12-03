@@ -59,50 +59,6 @@ public class ChessBoard {
         }
     }
 
-    /*Este método imprime o MENU na linha de comando*/
-    public void printMenu(){
-        System.out.println(" -------------------------");
-        System.out.println("|                         |");
-        System.out.println("| (1)Procurar uma Partida |");
-        System.out.println("|                         |");
-        System.out.println("| (2)Sair                 |");
-        System.out.println("|                         |");
-        System.out.println(" -------------------------");
-        System.out.println();
-    }
-
-    public int promoChoice(){
-        int choice;
-        Scanner keyboard = new Scanner(System.in);
-        do {
-            System.out.print("1- Queen\n2- Rook\n3- Knight\n4- Bishop\nChoice: ");
-            choice = keyboard.nextInt();
-        }while(choice != 1 && choice!= 2 && choice != 3 && choice != 4);
-        return choice;
-    }
-
-    /*Este método imprime o tabuleiro na linha de comando num formato "bonitinho"*/
-    public void printBoard(){
-        for(int j=7; j>-1; j--){
-            System.out.println();
-            System.out.print(" "+(j+1)+" ");
-            for(int i=0; i<8; i++){
-                if(board[i][j].isEmpty()){
-                    System.out.print("  X   ");
-                }else{
-                        System.out.print(" " + board[i][j].getPiece().getPieceCode()
-                                + board[i][j].getPiece().getPlayerNumber()+ " ");
-                }
-            }
-            System.out.println();
-
-        }
-        System.out.print("   ");
-        for( int i=0; i<8; i++){
-            System.out.print("  "+(char)(65 + i) +"   ");
-        }
-        System.out.println();
-    }
 
     public Square getSquareByPosition(Position pos){
         if(pos.isValidPosition())

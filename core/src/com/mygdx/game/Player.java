@@ -48,11 +48,13 @@ public class Player {
         if(whitePieces) {
             myTurn=true;
             this.name = "Player 1";
+            num=1;
             piecesList.add(new King(this, 'E', 1));
             piecesList.add(new Queen(this, 'D', 1));
         }
         else{
             this.name = "Player 2";
+            num=2;
             piecesList.add(new King(this,'D',1));
             piecesList.add(new Queen(this,'E',1));
         }

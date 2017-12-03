@@ -16,7 +16,7 @@ public class ChessTable extends ChessBoard {
     public int myNumber;
     public ChessLogic chessLogic = new ChessLogic();
 
-    public ChessTable(int myNumber, String myName, String enemyName, boolean onLine) {
+    public ChessTable(int myNumber, boolean onLine) {
         this.onLine = onLine;
         this.myNumber = myNumber;
         if (myNumber == 1) {
@@ -32,9 +32,6 @@ public class ChessTable extends ChessBoard {
             Enemy.setTurn(true);
             whoseTurn=Enemy;
         }
-
-        Me.setName(myName);
-        Enemy.setName(enemyName);
 
         Me.setEnemy(Enemy);
         Enemy.setEnemy(Me);
@@ -87,13 +84,13 @@ public class ChessTable extends ChessBoard {
 
         if (Me.getTurn()) return false;
 
-        if (myNumber==1) expected=2;
-        else expected=1;
+        if (myNumber == 1) expected = 2;
+        else expected = 1;
 
         String lastMove = Web.getMove();
         pl = (int) lastMove.charAt(0) - 48;
 
-        if(pl!= expected) return false;
+        if (pl != expected) return false;
 
         Position source = new Position((int) lastMove.charAt(1) - 65, (int) lastMove.charAt(2) - 49);
         Position dest = new Position((int) lastMove.charAt(3) - 65, (int) lastMove.charAt(4) - 49);
@@ -101,15 +98,16 @@ public class ChessTable extends ChessBoard {
         source.invert();
         dest.invert();
 
-        requestMove(Enemy, source, dest, false);
+        if (requestMove(Enemy, source, dest, false)){
 
-        if(this.needPromotion){
-            // funcão web que recebe a promoção do adversario
-            // chama this.proceedPromotion(choice) com a escolha do usuario
+            if (this.needPromotion) {
+                // funcão web que recebe a promoção do adversario
+                // chama this.proceedPromotion(choice) com a escolha do usuario
+            }
+            return true;
         }
 
-        return true;
-
+        return false;
     }
 }
 
