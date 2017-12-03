@@ -10,7 +10,7 @@ public class ChessLogic {
 
     }
 
-    public boolean moveAnalisys(ChessBoard cb, Player p, Position source, Position dest){
+    public boolean preMoveAnalisys(ChessBoard cb, Player p, Position source, Position dest){
         Piece piece;
         if(!isTurn(p)){
             System.out.println("Aguarde a jogada do seu oponente");
@@ -40,6 +40,29 @@ public class ChessLogic {
         }
 
         return true;
+    }
+
+    public void postMoveAnalisys(Player p, ChessTable ct) {
+
+        p.refresh();
+        p.enemy.refresh();
+
+        if (isKingInDanger(ct, p.enemy)) {
+            p.enemy.setUnderCheck(true);
+            System.out.println(p.enemy.getName() + " está em Cheque!");
+        } else {
+            p.enemy.setUnderCheck(false);
+        }
+
+        if (isUnderCheckMate(ct, p.enemy)) {
+            System.out.println("Check Mate! " + p.getName() + " venceu!");
+            ct.Me.setTurn(false);
+            ct.Enemy.setTurn(false);
+            ct.winner = p;
+            ct.EndOfTheGame = true;
+        }
+
+
     }
 
 
@@ -103,14 +126,10 @@ public class ChessLogic {
                 for(int j=0; j<positions.size(); j++){
                     position = positions.get(j);
                     if(willKingSurviveMove(cb, pl, piece.getPosition(), position)){
-                        pieces = null;
-                        positions = null;
                         return false;
                     }
                 }
             }
-            pieces = null;
-            positions = null;
             return true;
         }
 

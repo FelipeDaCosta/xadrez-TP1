@@ -92,7 +92,6 @@ public class GameScreen implements Screen{
 
     @Override
     public void dispose() {
-        board.dispose();
         game.dispose();
     }
 }

@@ -16,7 +16,7 @@ import com.mygdx.pieces.PieceCode;
 * */
 
 
-public class BoardDrawer extends Drawable {
+public class BoardDrawer{
 
     ChessTable ct;
     public SpriteBatch sb;
