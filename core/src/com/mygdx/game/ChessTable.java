@@ -67,6 +67,7 @@ public class ChessTable extends ChessBoard {
 
 
     public void procceedPromotion(int choice) {
+        // manda na WEB a escolha
         pawnToPromote.promotePawn(choice, this);
         needPromotion = false;
         chessLogic.postMoveAnalisys(pawnToPromote.getPlayer(), this);
