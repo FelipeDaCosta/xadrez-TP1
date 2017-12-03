@@ -34,7 +34,9 @@ public class ChessTable extends ChessBoard {
         }
 
         Me.setEnemy(Enemy);
+        Me.setName("Você");
         Enemy.setEnemy(Me);
+        Enemy.setName("Seu adversario");
 
         super.placePieces(Me.getPieces());
         super.placePieces(Enemy.getPieces());

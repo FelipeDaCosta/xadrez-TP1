@@ -36,6 +36,7 @@ public class XadrezNaLinhaDeComando {
                 else if(resp.equals("ok/2")) myNymber = 2;
                 else{
                     System.out.println("Não foi possível encontrar um jogo");
+                    Web.finishGame();
                     System.exit(0);
                     return;
                 }
@@ -51,6 +52,7 @@ public class XadrezNaLinhaDeComando {
 
                 System.out.print("Your name: ");
                 myname = keyboard.nextLine();
+
                 break;
             case ('2'):
                 System.exit(0);
@@ -58,6 +60,7 @@ public class XadrezNaLinhaDeComando {
         }
 
         chessTable = new ChessTable(myNymber, true);
+        chessTable.Me.setName(myname);
 
         while (true) {
             System.out.println();
@@ -104,7 +107,7 @@ public class XadrezNaLinhaDeComando {
                         Web.finishGame();
                         System.exit(0);
                         return;
-                    }
+                    }else
                     System.out.println("Comando não reconhecido. Tente Novamente");
                 }
 
