@@ -102,7 +102,7 @@ public class ChessLogic {
                 positions = piece.canGo(cb);
                 for(int j=0; j<positions.size(); j++){
                     position = positions.get(j);
-                    if(!willKingSurviveMove(cb, pl, piece.getPosition(), position)){
+                    if(willKingSurviveMove(cb, pl, piece.getPosition(), position)){
                         pieces = null;
                         positions = null;
                         return false;
