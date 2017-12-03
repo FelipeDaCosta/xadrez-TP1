@@ -25,6 +25,8 @@ public class GameScreen implements Screen{
     OrthographicCamera camera;
     public String username;
     int count=0;
+    public int promotion = 0;
+    private int promochoice;
 
 
     public GameScreen(Chess game, EventHandler eventHandler, ChessTable ct, String name, boolean onLine) {
@@ -61,7 +63,11 @@ public class GameScreen implements Screen{
 
         if(ct.Me.getTurn() || !onLine )eventHandler.listen();
         else ct.verifyEnemyMove();
-        if(ct.needPromotion) ct.procceedPromotion(1);
+        if(ct.needPromotion && promotion == 1){
+            ct.procceedPromotion(promochoice);
+            promochoice = 0;
+            promotion = 0;
+        }
         if(ct.EndOfTheGame) game.setScreen(new GameOver(game, ct.winner));
 
 
@@ -70,6 +76,8 @@ public class GameScreen implements Screen{
         board.drawBoard();
         eventHandler.pathHighLighter();
         board.drawPieces();
+        if(ct.needPromotion)
+            promochoice = board.promotion(ct,this);
         game.sb.end();
 
     }
