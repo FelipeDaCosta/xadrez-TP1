@@ -13,18 +13,10 @@ import static com.mygdx.pieces.PieceCode.PAW;
 public class EventHandler {
 
     ChessTable ct;
-    SpriteBatch sb;
     BoardDrawer db;
     PositionList posList=null;
     Piece selected=null;
-    boolean onLine;
 
-
-    Player pl;
-    Position pos;
-    Position pd;
-    Player p;
-    int k;
 
     public EventHandler(ChessTable ct, BoardDrawer db)
     {

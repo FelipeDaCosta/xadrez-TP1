@@ -47,25 +47,25 @@ public class GameScreen implements Screen{
 
         /*Esse trecho de código deixa a renderização mais lenta, pois os cliques do mouse eram interpre
         * tados como multiplos cliques
-        *
+        **/
         Gdx.graphics.setContinuousRendering(false);
         if(Gdx.graphics.getDeltaTime()>5)
             Gdx.graphics.requestRendering();
-*/
+
         camera.update();
         game.sb.setProjectionMatrix(camera.combined);
 
 
-            if (ct.Me.getTurn() || !onLine) eventHandler.listen();
-            else ct.verifyEnemyMove();
-            if (ct.EndOfTheGame) game.setScreen(new GameOver(game, ct.winner));
+        if (ct.Me.getTurn() || !onLine) eventHandler.listen();
+        else ct.verifyEnemyMove();
+        if (ct.EndOfTheGame) game.setScreen(new GameOver(game, ct.winner));
 
 
         game.sb.begin();
         board.drawBoard();
         eventHandler.pathHighLighter();
         board.drawPieces();
-        if(ct.needPromotion && (ct.Me.getTurn() || !onLine)) board.drawPromotion(ct,this);
+        if(ct.needPromotion && (ct.Me.getTurn() || !onLine)) board.drawPromotion();
         game.sb.end();
 
     }

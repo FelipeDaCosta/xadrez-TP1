@@ -18,11 +18,11 @@ import com.mygdx.pieces.PieceCode;
 
 public class BoardDrawer extends Drawable {
 
-    ChessBoard cb;
+    ChessTable ct;
     public SpriteBatch sb;
 
-    public BoardDrawer(ChessBoard cb, SpriteBatch sb){
-        this.cb = cb;
+    public BoardDrawer(ChessTable ct, SpriteBatch sb){
+        this.ct = ct;
         this.sb = sb;
     }
 
@@ -39,8 +39,8 @@ public class BoardDrawer extends Drawable {
     public void drawPieces(){
         for(int i =0; i<8; i++){
             for(int j=0; j<8; j++){
-                if(cb.getSquare(i,j).hasPiece()){
-                    sb.draw(textureByPiece(cb.getSquare(i,j).getPiece()),
+                if(ct.getSquare(i,j).hasPiece()){
+                    sb.draw(textureByPiece(ct.getSquare(i,j).getPiece()),
                             (float)i* Util.SQUARE_WIDTH, (float)j*Util.SQUARE_HEIGHT);
                 }
             }
@@ -103,7 +103,7 @@ public class BoardDrawer extends Drawable {
         return new Texture(Gdx.files.internal("white_square.png"));
     }
 
-    public void drawPromotion(ChessTable ct, GameScreen gs){
+    public void drawPromotion(){
         sb.draw(new Texture(Gdx.files.internal("promNorm.png")), Util.SCREEN_WIDTH / 2 - 235,
                 Util.SCREEN_HEIGHT / 2 - 85, 470, 171);
         if(Gdx.input.getX() > 72 && Gdx.input.getX() < 150 && Gdx.input.getY() > 305 && Gdx.input.getY() < 385) {

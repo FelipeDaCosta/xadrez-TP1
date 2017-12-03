@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.mygdx.game.ChessTable;
 import com.mygdx.game.Player;
 import com.mygdx.game.Util;
@@ -24,6 +25,7 @@ public class GameOver implements Screen {
     Texture mmenuInactive;
     Texture exitGameActive;
     Texture exitGameInactive;
+    private BitmapFont font;
 
     public GameOver (Chess game, Player winner) {
         this.game = game;
@@ -34,6 +36,9 @@ public class GameOver implements Screen {
         mmenuInactive = new Texture("button_main-menuI.png");
         exitGameActive = new Texture("button_exitA.png");
         exitGameInactive = new Texture("button_exitI.png");
+
+        font = new BitmapFont();
+        font.getData().setScale(3);
     }
 
     @Override
@@ -51,7 +56,7 @@ public class GameOver implements Screen {
         else
             game.sb.draw(gameover, 0, 0, 600, 600);
 
-        //Escreve a mensagem com pelo menos o nome de quem ganhou
+        font.draw(this.game.sb, winner.getName()+" ganhou!", Util.SCREEN_WIDTH/2 - 200, 2*Util.SCREEN_HEIGHT/3);
 
 
         if(Gdx.input.getX() > 154 && Gdx.input.getX() < 446 && Gdx.input.getY() > 333 && Gdx.input.getY() < 400) {
