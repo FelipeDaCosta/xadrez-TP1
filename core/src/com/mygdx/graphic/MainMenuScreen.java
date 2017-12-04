@@ -54,7 +54,7 @@ public class MainMenuScreen implements Screen {
                 BoardDrawer db = new BoardDrawer(ct,game.sb);
                 EventHandler eventHandler = new EventHandler(ct, db);
                 //game.setScreen(new GameOver(game, ct.Me));
-                game.setScreen(new GameScreen(game, eventHandler, ct, "", false));
+                game.setScreen(new GameScreen(game, eventHandler, ct, 0, false));
             }
         }else
             game.sb.draw(startGameInactive, Util.SCREEN_WIDTH/2 - 146, 300, 292, 67);
@@ -64,16 +64,16 @@ public class MainMenuScreen implements Screen {
                 this.dispose();
                // game.setScreen(new PlayOnlineMenuScreen(game));
                 String resp = Web.findGame();
-                if(resp.equals("ok/1"))
+                if(resp.equals("ok/1")) // First player
                     game.setScreen(new WaitingPlayerScreen(game));
-                if(resp.equals("ok/2")) {
+                if(resp.equals("ok/2")) { // Second player
                     this.dispose();
                     /* Dinâmica de criação de um jogo. PARA TESTES */
                     ChessTable ct = new ChessTable(1, true);
 
                     BoardDrawer db = new BoardDrawer(ct,game.sb);
                     EventHandler eventHandler = new EventHandler(ct, db);
-                    game.setScreen(new GameScreen(game, eventHandler, ct, "", true));
+                    game.setScreen(new GameScreen(game, eventHandler, ct, 2, true));
                 }
             }
         }else
