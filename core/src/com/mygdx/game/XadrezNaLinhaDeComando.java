@@ -19,7 +19,7 @@ public class XadrezNaLinhaDeComando {
         ChessTable chessTable;
         Scanner keyboard;
         keyboard = new Scanner(System.in);
-        int myNymber=0;
+        int myNumber=0;
         String line, myname = "Me";
 
 
@@ -32,8 +32,8 @@ public class XadrezNaLinhaDeComando {
         switch (line.charAt(0)) {
             case ('1'):
                 String resp = Web.findGame();
-                if(resp.equals("ok/1")) myNymber = 1;
-                else if(resp.equals("ok/2")) myNymber = 2;
+                if(resp.equals("ok/1")) myNumber = 1;
+                else if(resp.equals("ok/2")) myNumber = 2;
                 else{
                     System.out.println("Não foi possível encontrar um jogo");
                     Web.finishGame();
@@ -47,7 +47,7 @@ public class XadrezNaLinhaDeComando {
                 }
 
 
-                System.out.println("Jogo encontrado! Você é o player "+myNymber);
+                System.out.println("Jogo encontrado! Você é o player "+myNumber);
 
 
                 System.out.print("Your name: ");
@@ -59,7 +59,7 @@ public class XadrezNaLinhaDeComando {
                 break;
         }
 
-        chessTable = new ChessTable(myNymber, true);
+        chessTable = new ChessTable(myNumber, true);
         chessTable.Me.setName(myname);
 
         while (true) {

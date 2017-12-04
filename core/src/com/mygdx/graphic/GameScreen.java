@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.mygdx.game.ChessTable;
 import com.mygdx.game.Util;
+import com.mygdx.web.Web;
 
 /**
  * Created by felipecosta on 10/2/17.
@@ -18,13 +19,15 @@ public class GameScreen implements Screen{
     EventHandler eventHandler;
     BoardDrawer board;
     OrthographicCamera camera;
-    public String username;
+    public int playerNum;
     int count=0;
     public int promotion = 0;
     private int promochoice;
+    private String player_name = "";
+    private String enemy_name = "";
 
 
-    public GameScreen(Chess game, EventHandler eventHandler, ChessTable ct, String name, boolean onLine) {
+    public GameScreen(Chess game, EventHandler eventHandler, ChessTable ct, int playerNum, boolean onLine) {
         this.onLine = onLine;
         this.game = game;
         this.ct = ct;
@@ -32,7 +35,22 @@ public class GameScreen implements Screen{
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Util.SCREEN_WIDTH, Util.SCREEN_HEIGHT);
         board = new BoardDrawer(ct, game.sb);
-        username = name;
+        this.playerNum = playerNum;
+        if(onLine) {
+            String names = Web.gotGame();
+            String[] names_parts = names.split("/");
+            if(!names.equals("no")) {
+                if(this.playerNum == 1) {
+                    this.player_name = names_parts[1];
+                    this.enemy_name = names_parts[2];
+                }
+                else {
+                    this.player_name = names_parts[2];
+                    this.enemy_name = names_parts[1];
+                }
+            }
+
+        }
     }
 
     @Override

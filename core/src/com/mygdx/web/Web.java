@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Scanner;
 
 /**
  * Created by felipecosta on 11/6/17. ver 1.0
@@ -48,7 +49,10 @@ public class Web {
      * @return String ok para achar um jogo e full caso nao haja vagas
      */
     public static String findGame() {
-        return getMethod("findGame");
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Digite seu nome: ");
+        String name = scan.next();
+        return getMethod("findGame/" + name);
     }
 
     /**
@@ -81,11 +85,32 @@ public class Web {
 
     }
 
-
-
     public static String getMove()  {
         return getMethod("getMove");
     }
+
+    /**
+     *
+     * @param pieceCode Codigo da peca que o peao vai virar.
+     *                  1 - Rainha, 2 - Bispo, 3 - Cavalo, 4 - Torre
+     * @return "no game" em caso de falha e "ok/pieceCoce" em sucesso
+     */
+    public static String promote(int pieceCode) {
+        if(pieceCode >= 1 && pieceCode <= 4)
+            return getMethod("promote/"+pieceCode);
+        else
+            return "no";
+    }
+
+    /**
+     * Retorna a peca promovida
+     *
+     * @return Peca promovida e "no game" em caso de falha
+     */
+    public static String getPromotion() {
+        return getMethod("getPromotion/");
+    }
+
 
     /**
      * Chama o metodo finishGame que termina o jogo atual

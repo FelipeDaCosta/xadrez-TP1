@@ -39,13 +39,13 @@ public class WaitingPlayerScreen implements Screen {
         count++;
         if(count >= MAX_COUNT) {
             count = 0;
-            if(Web.gotGame().equals("yes")) {
+            if(Web.gotGame().startsWith("yes")) {
                 this.dispose();
                 ChessTable ct = new ChessTable(1, true);
 
                 BoardDrawer db = new BoardDrawer(ct,game.sb);
                 EventHandler eventHandler = new EventHandler(ct, db);
-                game.setScreen(new GameScreen(game, eventHandler, ct, "", true));
+                game.setScreen(new GameScreen(game, eventHandler, ct, 1, true));
             }
         }
 
