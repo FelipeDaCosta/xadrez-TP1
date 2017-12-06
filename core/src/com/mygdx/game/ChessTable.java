@@ -78,11 +78,19 @@ public class ChessTable extends ChessBoard {
     public void changeTurn() {
         if(whoseTurn==Me) {
             whoseTurn=Enemy;
-            System.out.println("Vez das pretas");
+            if(onLine) {
+                System.out.println("Vez do(a) " + whoseTurn.getName());
+            } else {
+                System.out.println("Vez das pretas");
+            }
         }
         else if(whoseTurn==Enemy){
             whoseTurn=Me;
-            System.out.println("Vez das brancas");
+            if(onLine) {
+                System.out.println("Vez das brancas");
+            } else {
+                System.out.println("Vez do(a) " + whoseTurn.getName());
+            }
         }
         Me.setTurn(!Me.getTurn());
         Enemy.setTurn(!Enemy.getTurn());

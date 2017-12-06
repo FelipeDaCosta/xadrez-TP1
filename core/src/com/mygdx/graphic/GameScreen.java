@@ -48,6 +48,7 @@ public class GameScreen implements Screen{
                     this.player_name = names_parts[2];
                     this.enemy_name = names_parts[1];
                 }
+                System.out.println("Voce esta jogando contra " + this.enemy_name);
             }
 
         }
