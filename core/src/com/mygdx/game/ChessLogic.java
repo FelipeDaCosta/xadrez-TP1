@@ -10,10 +10,15 @@ public class ChessLogic {
 
     }
 
-    public boolean preMoveAnalisys(ChessBoard cb, Player p, Position source, Position dest){
+    public boolean preMoveAnalisys(ChessTable cb, Player p, Position source, Position dest){
         Piece piece;
         if(!isTurn(p)){
             System.out.println("Aguarde a jogada do seu oponente");
+            return false;
+        }
+
+        if(cb.needPromotion){
+            System.out.println("Existe uma promoção pendente.");
             return false;
         }
 
@@ -50,7 +55,7 @@ public class ChessLogic {
         if (isKingInDanger(ct, p.enemy)) {
             p.enemy.setUnderCheck(true);
             System.out.println(p.enemy.getName() + " está em Cheque!");
-        } else {
+        }else{
             p.enemy.setUnderCheck(false);
         }
 

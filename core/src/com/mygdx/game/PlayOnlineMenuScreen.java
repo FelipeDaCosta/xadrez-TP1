@@ -1,4 +1,4 @@
-package com.mygdx.graphic;
+package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -10,10 +10,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.mygdx.game.ChessTable;
-import com.mygdx.game.Player;
-import com.mygdx.game.Util;
-import com.mygdx.web.Web;
+import com.mygdx.graphic.Chess;
+import com.mygdx.graphic.*;
 
 /**
  * Created by Iago on 10/27/2017.
@@ -70,12 +68,10 @@ public class PlayOnlineMenuScreen implements Screen {
         game.sb.begin();
         if (username != "DASAAS") {
             this.dispose();
-            //Dinâmica de criação de um jogo. PARA TESTES
-            ChessTable ct = new ChessTable(1, "alex", "jorge", true);
-
+            ChessTable ct = new ChessTable(1,  true);
             BoardDrawer db = new BoardDrawer(ct, game.sb);
             EventHandler eventHandler = new EventHandler(ct, db);
-            game.setScreen(new GameScreen(game, eventHandler, ct, username, true));
+            game.setScreen(new GameScreen(game, eventHandler, ct,1,true));
         }
         if(Gdx.input.getX() > 154 && Gdx.input.getX() < 446 && Gdx.input.getY() > 350 && Gdx.input.getY() < 417) {
             game.sb.draw(backGameActive, Util.SCREEN_WIDTH / 2 - 146, 183, 292, 67);
