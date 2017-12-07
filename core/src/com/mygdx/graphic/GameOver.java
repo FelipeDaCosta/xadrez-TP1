@@ -56,7 +56,7 @@ public class GameOver implements Screen {
         else
             game.sb.draw(gameover, 0, 0, 600, 600);
 
-        font.draw(this.game.sb, winner.getName()+" ganhou!", Util.SCREEN_WIDTH/2 - 200, 2*Util.SCREEN_HEIGHT/3);
+        font.draw(this.game.sb, winner.getName()+" venceram!", Util.SCREEN_WIDTH/2 - 200, 2*Util.SCREEN_HEIGHT/3);
 
 
         if(Gdx.input.getX() > 154 && Gdx.input.getX() < 446 && Gdx.input.getY() > 333 && Gdx.input.getY() < 400) {

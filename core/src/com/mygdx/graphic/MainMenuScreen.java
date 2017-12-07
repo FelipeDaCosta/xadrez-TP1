@@ -69,7 +69,7 @@ public class MainMenuScreen implements Screen {
                 if(resp.equals("ok/2")) { // Second player
                     this.dispose();
                     /* Dinâmica de criação de um jogo. PARA TESTES */
-                    ChessTable ct = new ChessTable(1, true);
+                    ChessTable ct = new ChessTable(2, true);
 
                     BoardDrawer db = new BoardDrawer(ct,game.sb);
                     EventHandler eventHandler = new EventHandler(ct, db);
