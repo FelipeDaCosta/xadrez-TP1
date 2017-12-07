@@ -62,7 +62,7 @@ public class MainMenuScreen implements Screen {
             game.sb.draw(startOnlineGameActive, Util.SCREEN_WIDTH / 2 - 146, 183, 292, 67);
             if(Gdx.input.isTouched()) {
                 this.dispose();
-               // game.setScreen(new PlayOnlineMenuScreen(game));
+                //game.setScreen(new PlayOnlineMenuScreen(game));
                 String resp = Web.findGame();
                 if(resp.equals("ok/1")) // First player
                     game.setScreen(new WaitingPlayerScreen(game));

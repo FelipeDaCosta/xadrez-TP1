@@ -10,8 +10,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+<<<<<<< HEAD
 import com.mygdx.game.*;
 
+=======
+import com.mygdx.game.Util;
+import com.mygdx.graphic.Chess;
+import com.mygdx.graphic.*;
+>>>>>>> 22ec2c67c5f8855df9ee8747272a41c5bbcc0c94
 
 /**
  * Created by Iago on 10/27/2017.
@@ -66,8 +72,8 @@ public class PlayOnlineMenuScreen implements Screen {
         stage.act(delta);
         stage.draw();
         game.sb.begin();
-        if (username != "DASAAS") {
             this.dispose();
+<<<<<<< HEAD
             ChessTable ct = new ChessTable(1,  true);
             BoardDrawer db = new BoardDrawer(ct, game.sb);
             EventHandler eventHandler = new EventHandler(ct, db);
@@ -82,9 +88,21 @@ public class PlayOnlineMenuScreen implements Screen {
         }else
             game.sb.draw(backGameInactive, Util.SCREEN_WIDTH/2 - 146, 183, 292, 67);
         game.sb.end();
+=======
+            if (Gdx.input.getX() > 154 && Gdx.input.getX() < 446 && Gdx.input.getY() > 350 && Gdx.input.getY() < 417) {
+                game.sb.draw(backGameActive, Util.SCREEN_WIDTH / 2 - 146, 183, 292, 67);
+                if (Gdx.input.isTouched()) {
+                    this.dispose();
+                    game.setScreen(new MainMenuScreen(game));
+                }
+            } else
+                game.sb.draw(backGameInactive, Util.SCREEN_WIDTH / 2 - 146, 183, 292, 67);
+            game.sb.end();
+>>>>>>> 22ec2c67c5f8855df9ee8747272a41c5bbcc0c94
 
 
-    }
+        }
+
 
     @Override
     public void resize(int width, int height) {
