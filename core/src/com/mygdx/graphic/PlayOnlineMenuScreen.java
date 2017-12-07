@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.graphic;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -10,13 +10,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-<<<<<<< HEAD:core/src/com/mygdx/game/PlayOnlineMenuScreen.java
+import com.mygdx.game.Util;
 import com.mygdx.graphic.Chess;
 import com.mygdx.graphic.*;
-=======
-import com.mygdx.game.ChessTable;
-import com.mygdx.game.Util;
->>>>>>> 1c540b9376d1726ebf2f70c7c62de5b388f7cfc7:core/src/com/mygdx/graphic/PlayOnlineMenuScreen.java
 
 /**
  * Created by Iago on 10/27/2017.
@@ -71,34 +67,20 @@ public class PlayOnlineMenuScreen implements Screen {
         stage.act(delta);
         stage.draw();
         game.sb.begin();
-        if (username != "DASAAS") {
             this.dispose();
-<<<<<<< HEAD:core/src/com/mygdx/game/PlayOnlineMenuScreen.java
-            ChessTable ct = new ChessTable(1,  true);
-            BoardDrawer db = new BoardDrawer(ct, game.sb);
-            EventHandler eventHandler = new EventHandler(ct, db);
-            game.setScreen(new GameScreen(game, eventHandler, ct,1,true));
-=======
-            //Dinâmica de criação de um jogo. PARA TESTES
-            //ChessTable ct = new ChessTable(1, "alex", "jorge", true);
+            if (Gdx.input.getX() > 154 && Gdx.input.getX() < 446 && Gdx.input.getY() > 350 && Gdx.input.getY() < 417) {
+                game.sb.draw(backGameActive, Util.SCREEN_WIDTH / 2 - 146, 183, 292, 67);
+                if (Gdx.input.isTouched()) {
+                    this.dispose();
+                    game.setScreen(new MainMenuScreen(game));
+                }
+            } else
+                game.sb.draw(backGameInactive, Util.SCREEN_WIDTH / 2 - 146, 183, 292, 67);
+            game.sb.end();
 
-            //BoardDrawer db = new BoardDrawer(ct, game.sb);
-            //EventHandler eventHandler = new EventHandler(ct, db);
-            //game.setScreen(new GameScreen(game, eventHandler, ct, 1, true));
->>>>>>> 1c540b9376d1726ebf2f70c7c62de5b388f7cfc7:core/src/com/mygdx/graphic/PlayOnlineMenuScreen.java
+
         }
-        if(Gdx.input.getX() > 154 && Gdx.input.getX() < 446 && Gdx.input.getY() > 350 && Gdx.input.getY() < 417) {
-            game.sb.draw(backGameActive, Util.SCREEN_WIDTH / 2 - 146, 183, 292, 67);
-            if(Gdx.input.isTouched()) {
-                this.dispose();
-                game.setScreen(new MainMenuScreen(game));
-            }
-        }else
-            game.sb.draw(backGameInactive, Util.SCREEN_WIDTH/2 - 146, 183, 292, 67);
-        game.sb.end();
 
-
-    }
 
     @Override
     public void resize(int width, int height) {

@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.mygdx.game.ChessTable;
 import com.mygdx.game.Player;
 import com.mygdx.game.Util;
+import com.mygdx.web.Web;
 
 /**
  * Created by Iago on 11/12/2017.
@@ -57,7 +58,7 @@ public class GameOver implements Screen {
             game.sb.draw(gameover, 0, 0, 600, 600);
 
         font.draw(this.game.sb, winner.getName()+" venceram!", Util.SCREEN_WIDTH/2 - 200, 2*Util.SCREEN_HEIGHT/3);
-
+        Web.finishGame();
 
         if(Gdx.input.getX() > 154 && Gdx.input.getX() < 446 && Gdx.input.getY() > 333 && Gdx.input.getY() < 400) {
             game.sb.draw(mmenuActive, Util.SCREEN_WIDTH / 2 - 146, 200, 292, 67);

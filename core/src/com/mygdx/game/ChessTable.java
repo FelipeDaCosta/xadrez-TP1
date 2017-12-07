@@ -32,11 +32,11 @@ public class ChessTable extends ChessBoard {
             Enemy.setTurn(true);
             whoseTurn=Enemy;
         }
-
         Me.setEnemy(Enemy);
-        Me.setName("Brancas");
         Enemy.setEnemy(Me);
+        Me.setName("Brancas");
         Enemy.setName("Pretas");
+
 
         super.placePieces(Me.getPieces());
         super.placePieces(Enemy.getPieces());
@@ -87,9 +87,9 @@ public class ChessTable extends ChessBoard {
         else if(whoseTurn==Enemy){
             whoseTurn=Me;
             if(onLine) {
-                System.out.println("Vez das brancas");
-            } else {
                 System.out.println("Vez do(a) " + whoseTurn.getName());
+            } else {
+                System.out.println("Vez das brancas");
             }
         }
         Me.setTurn(!Me.getTurn());
