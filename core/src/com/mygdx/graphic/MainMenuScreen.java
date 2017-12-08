@@ -57,6 +57,7 @@ public class MainMenuScreen implements Screen {
             }
         }else
             game.sb.draw(startGameInactive, Util.SCREEN_WIDTH/2 - 146, 300, 292, 67);
+
         if(Gdx.input.getX() > 154 && Gdx.input.getX() < 446 && Gdx.input.getY() > 350 && Gdx.input.getY() < 417) {
             game.sb.draw(startOnlineGameActive, Util.SCREEN_WIDTH / 2 - 146, 183, 292, 67);
             if(Gdx.input.isTouched()) {
@@ -64,16 +65,19 @@ public class MainMenuScreen implements Screen {
                 String resp = Web.findGame("Player");
                 if(resp.equals("ok/1")) // First player
                     game.setScreen(new WaitingPlayerScreen(game));
+
                 else if(resp.equals("ok/2")) { // Second player
                     this.dispose();
                     ChessTable ct = new ChessTable(2, true);
                     BoardDrawer db = new BoardDrawer(ct,game.sb);
                     EventHandler eventHandler = new EventHandler(ct, db);
                     game.setScreen(new GameScreen(game, eventHandler, ct, 2, true));
-                }else Web.finishGame();
+                }else
+                    Web.finishGame();
             }
         }else
             game.sb.draw(startOnlineGameInactive, Util.SCREEN_WIDTH/2 - 146, 183, 292, 67);
+
         if(Gdx.input.getX() > 154 && Gdx.input.getX() < 446 && Gdx.input.getY() > 467 && Gdx.input.getY() < 534) {
             game.sb.draw(exitGameActive, Util.SCREEN_WIDTH / 2 - 146, 66, 292, 67);
             if(Gdx.input.isTouched())

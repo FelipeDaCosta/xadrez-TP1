@@ -66,22 +66,22 @@ public class PlayOnlineMenuScreen implements Screen {
         stage.act(delta);
         stage.draw();
         game.sb.begin();
-        this.dispose();
+
         ChessTable ct = new ChessTable(1, true);
         BoardDrawer db = new BoardDrawer(ct, game.sb);
         EventHandler eventHandler = new EventHandler(ct, db);
         game.setScreen(new GameScreen(game, eventHandler, ct, 1, true));
 
         if(Gdx.input.getX()>154&&Gdx.input.getX() < 446&&Gdx.input.getY()>350&&Gdx.input.getY() < 417)
-
-    {
+        {
         game.sb.draw(backGameActive, Util.SCREEN_WIDTH / 2 - 146, 183, 292, 67);
         if (Gdx.input.isTouched()) {
             this.dispose();
             game.setScreen(new MainMenuScreen(game));
         }
-    }else
+        }else
             game.sb.draw(backGameInactive,Util.SCREEN_WIDTH/2-146,183,292,67);
+
         game.sb.end();
 
     }

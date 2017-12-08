@@ -4,6 +4,7 @@ import com.mygdx.pieces.*;
 import com.mygdx.web.Web;
 
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 
 public class XadrezNaLinhaDeComando {
@@ -14,14 +15,14 @@ public class XadrezNaLinhaDeComando {
 * */
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
-        ChessTable chessTable;
+        ChessTable chessTable = null;
         Scanner keyboard;
         keyboard = new Scanner(System.in);
         int myNumber=0;
         String line, myname = "Me";
-
+        String enemy_name = "Enemy";
 
 
         printMenu();
@@ -46,14 +47,24 @@ public class XadrezNaLinhaDeComando {
 
                 if(!Web.gotGame().startsWith("yes")) System.out.println("Aguardando oponente...");
 
-                while(Web.gotGame().charAt(0)!='y'){
-                }
-
+                while(Web.gotGame().charAt(0)!='y')
+                    TimeUnit.SECONDS.sleep(3);
 
                 System.out.println("Jogo encontrado! Você é o player "+myNumber);
 
+                String names = Web.gotGame();
 
+                String[] names_parts = names.split("/");
+                if(!names.equals("no")) {
+                    if(myNumber == 1) {
+                        enemy_name = names_parts[2];
+                    }
+                    else {
+                        enemy_name = names_parts[1];
+                    }
+                    System.out.println("Voce esta jogando contra " + enemy_name);
 
+                }
 
                 break;
             case ('2'):
@@ -63,6 +74,7 @@ public class XadrezNaLinhaDeComando {
 
         chessTable = new ChessTable(myNumber, true);
         chessTable.Me.setName(myname);
+        chessTable.Enemy.setName(enemy_name);
 
         while (true) {
             System.out.println();
@@ -87,8 +99,10 @@ public class XadrezNaLinhaDeComando {
 
             } else {
                 while (true) {
-                    System.out.println("Sua jogada: ");
 
+
+
+                    System.out.println("Sua jogada: ");
                     line = keyboard.nextLine();
                     if (line.length() == 4) {
                         Xs = line.charAt(0);

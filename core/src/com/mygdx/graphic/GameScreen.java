@@ -21,8 +21,6 @@ public class GameScreen implements Screen{
     OrthographicCamera camera;
     public int playerNum;
     int count=0;
-    public int promotion = 0;
-    private int promochoice;
     private String player_name = "";
     private String enemy_name = "";
 
@@ -36,23 +34,12 @@ public class GameScreen implements Screen{
         camera.setToOrtho(false, Util.SCREEN_WIDTH, Util.SCREEN_HEIGHT);
         board = new BoardDrawer(ct, game.sb);
         this.playerNum = playerNum;
-        if(onLine) {
-            String names = Web.gotGame();
-            String[] names_parts = names.split("/");
-            if(!names.equals("no")) {
-                if(this.playerNum == 1) {
-                    this.player_name = names_parts[1];
-                    this.enemy_name = names_parts[2];
-                }
-                else {
-                    this.player_name = names_parts[2];
-                    this.enemy_name = names_parts[1];
-                }
-                System.out.println("Voce esta jogando contra " + this.enemy_name);
-                ct.Me.setName(player_name);
-                ct.Enemy.setName(enemy_name);
-            }
-
+        if(ct.myNumber==1){
+            ct.Me.setName("Brancas");
+            ct.Enemy.setName("Pretas");
+        }else{
+            ct.Me.setName("Pretas");
+            ct.Enemy.setName("Brancas");
         }
     }
 
@@ -78,7 +65,14 @@ public class GameScreen implements Screen{
 
 
         if (ct.Me.getTurn() || !onLine) eventHandler.listen();
-        else ct.verifyEnemyMove();
+        else{
+            count++;
+            if(count>10) {
+                System.out.println("Verificou Web");
+                ct.verifyEnemyMove();
+                count=0;
+            }
+        }
         if (ct.EndOfTheGame) game.setScreen(new GameOver(game, ct.winner));
 
 
