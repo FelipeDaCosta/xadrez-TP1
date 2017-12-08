@@ -123,7 +123,8 @@ public class ChessTable extends ChessBoard {
 
             if (this.needPromotion) {
                 while(Web.getPromotion().startsWith("no")){}
-                int choice = (int)Web.getPromotion().charAt(3);
+                int choice = Character.getNumericValue(Web.getPromotion().charAt(0));
+                System.out.println(choice);
                 procceedPromotion(choice);
             }
             return true;
