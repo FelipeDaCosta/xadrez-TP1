@@ -97,6 +97,7 @@ public class XadrezNaLinhaDeComando {
                 while(!line.startsWith("0")){
                     System.out.println("digite '0' pra sair");
                     line = keyboard.nextLine();
+
                 }
                 Web.finishGame();
                 System.exit(0);

@@ -58,19 +58,22 @@ public class GameOver implements Screen {
             game.sb.draw(gameover, 0, 0, 600, 600);
 
         font.draw(this.game.sb, winner.getName()+" venceram!", Util.SCREEN_WIDTH/2 - 200, 2*Util.SCREEN_HEIGHT/3);
-        Web.finishGame();
+
 
         if(Gdx.input.getX() > 154 && Gdx.input.getX() < 446 && Gdx.input.getY() > 333 && Gdx.input.getY() < 400) {
             game.sb.draw(mmenuActive, Util.SCREEN_WIDTH / 2 - 146, 200, 292, 67);
             if(Gdx.input.isTouched()) {
+                Web.finishGame();
                 game.setScreen(new MainMenuScreen(game));
             }
         }else
             game.sb.draw(mmenuInactive, Util.SCREEN_WIDTH/2 - 146, 200, 292, 67);
         if(Gdx.input.getX() > 154 && Gdx.input.getX() < 446 && Gdx.input.getY() > 467 && Gdx.input.getY() < 534) {
             game.sb.draw(exitGameActive, Util.SCREEN_WIDTH / 2 - 146, 66, 292, 67);
-            if(Gdx.input.isTouched())
+            if(Gdx.input.isTouched()){
+                Web.finishGame();
                 Gdx.app.exit();
+            }
         }else
             game.sb.draw(exitGameInactive, Util.SCREEN_WIDTH/2 - 146, 66, 292, 67);
         game.sb.end();
