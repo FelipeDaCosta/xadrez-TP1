@@ -86,7 +86,18 @@ public class XadrezNaLinhaDeComando {
             char Yd=0;
 
             if(chessTable.EndOfTheGame){
+//                if(chessTable.Me == chessTable.winner){
+//
+//                 }
+            //    System.out.println("");
                 System.out.println("Check Mate! "+ chessTable.winner.getName()+" venceu! ");
+
+                System.out.println("digite '0' pra sair");
+                line = keyboard.nextLine();
+                while(!line.startsWith("0")){
+                    System.out.println("digite '0' pra sair");
+                    line = keyboard.nextLine();
+                }
                 Web.finishGame();
                 System.exit(0);
                 return;
