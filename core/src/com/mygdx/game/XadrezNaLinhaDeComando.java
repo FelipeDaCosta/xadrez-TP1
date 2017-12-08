@@ -31,7 +31,10 @@ public class XadrezNaLinhaDeComando {
         } while (line.charAt(0) != '1' && line.charAt(0) != '2');
         switch (line.charAt(0)) {
             case ('1'):
-                String resp = Web.findGame();
+                System.out.print("Your name: ");
+                myname = keyboard.nextLine();
+                String resp = Web.findGame(myname);
+                System.out.println(resp);
                 if(resp.equals("ok/1")) myNumber = 1;
                 else if(resp.equals("ok/2")) myNumber = 2;
                 else{
@@ -41,17 +44,16 @@ public class XadrezNaLinhaDeComando {
                     return;
                 }
 
-                if(!Web.gotGame().equals("yes")) System.out.println("Aguardando oponente...");
+                if(!Web.gotGame().startsWith("yes")) System.out.println("Aguardando oponente...");
 
-                while(!Web.gotGame().equals("yes")){
+                while(Web.gotGame().charAt(0)!='y'){
                 }
 
 
                 System.out.println("Jogo encontrado! Você é o player "+myNumber);
 
 
-                System.out.print("Your name: ");
-                myname = keyboard.nextLine();
+
 
                 break;
             case ('2'):

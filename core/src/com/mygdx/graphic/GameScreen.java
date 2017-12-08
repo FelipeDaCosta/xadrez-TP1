@@ -70,7 +70,7 @@ public class GameScreen implements Screen{
         * tados como multiplos cliques
         **/
         Gdx.graphics.setContinuousRendering(false);
-        if(Gdx.graphics.getDeltaTime()>5)
+        if(Gdx.graphics.getDeltaTime()>11)
             Gdx.graphics.requestRendering();
 
         camera.update();

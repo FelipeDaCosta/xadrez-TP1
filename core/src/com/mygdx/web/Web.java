@@ -48,10 +48,7 @@ public class Web {
      *
      * @return String ok para achar um jogo e full caso nao haja vagas
      */
-    public static String findGame() {
-        Scanner scan = new Scanner(System.in);
-        System.out.print("Digite seu nome: ");
-        String name = scan.next();
+    public static String findGame(String name) {
         return getMethod("findGame/" + name);
     }
 
