@@ -92,9 +92,9 @@ public class Web {
      *                  1 - Rainha, 2 - Bispo, 3 - Cavalo, 4 - Torre
      * @return "no game" em caso de falha e "ok/pieceCoce" em sucesso
      */
-    public static String promote(int pieceCode) {
-        if(pieceCode >= 1 && pieceCode <= 4)
-            return getMethod("promote/"+pieceCode);
+    public static String promote(int choice) {
+        if(choice >= 1 && choice <= 4)
+            return getMethod("promote/"+choice);
         else
             return "no";
     }

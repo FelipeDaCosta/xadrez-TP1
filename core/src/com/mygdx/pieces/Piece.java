@@ -96,8 +96,6 @@ public abstract class Piece{
         cb.getSquareByPosition(pos).putPiece(p);
     }
 
-    public PositionList canGo(ChessBoard cb){
-        return null;
-    }
+    public abstract PositionList canGo(ChessBoard cb);
 
 }

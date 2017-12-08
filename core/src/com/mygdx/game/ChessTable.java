@@ -14,33 +14,37 @@ public class ChessTable extends ChessBoard {
     public Player Me;
     public Player Enemy;
     public int myNumber;
+
     public ChessLogic chessLogic = new ChessLogic();
 
     public ChessTable(int myNumber, boolean onLine) {
         this.onLine = onLine;
         this.myNumber = myNumber;
         if (myNumber == 1) {
+
             Me = new Player(true, false);
             Enemy = new Player(false, true);
             Me.setTurn(true);
             Enemy.setTurn(false);
             whoseTurn = Me;
+            Me.setName("Brancas");
+            Enemy.setName("Pretas");
         }else if (myNumber == 2) {
+
             Me = new Player(false, false);
             Enemy = new Player(true, true);
             Me.setTurn(false);
             Enemy.setTurn(true);
             whoseTurn=Enemy;
+            Enemy.setName("Brancas");
+            Me.setName("Pretas");
         }
+
         Me.setEnemy(Enemy);
         Enemy.setEnemy(Me);
-        Me.setName("Brancas");
-        Enemy.setName("Pretas");
 
-
-        super.placePieces(Me.getPieces());
-        super.placePieces(Enemy.getPieces());
-
+        placePieces(Me.getPieces());
+        placePieces(Enemy.getPieces());
 
     }
 
@@ -67,7 +71,7 @@ public class ChessTable extends ChessBoard {
 
 
     public void procceedPromotion(int choice) {
-        // manda na WEB a escolha
+        Web.promote(choice);
         pawnToPromote.promotePawn(choice, this);
         needPromotion = false;
         chessLogic.postMoveAnalisys(pawnToPromote.getPlayer(), this);
@@ -118,8 +122,9 @@ public class ChessTable extends ChessBoard {
         if (requestMove(Enemy, source, dest, false)){
 
             if (this.needPromotion) {
-                // funcão web que recebe a promoção do adversario
-                // chama this.proceedPromotion(choice) com a escolha do usuario
+                while(Web.getPromotion().startsWith("no")){}
+                int choice = (int)Web.getPromotion().charAt(3);
+                procceedPromotion(choice);
             }
             return true;
         }

@@ -46,7 +46,6 @@ public class ChessBoard {
     }
 
     protected void unmove(){
-
         Piece piece = this.getSquareByPosition(this.lastDestination).takePiece();
         this.getSquareByPosition(this.lastSource).putPiece(piece);
         this.getSquareByPosition(this.lastDestination).setEmpty();
